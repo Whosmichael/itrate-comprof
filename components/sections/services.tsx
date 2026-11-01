@@ -100,9 +100,24 @@ function PillarCopy({ p, i, active, onActive }: { p: Pillar; i: number; active: 
         <span className="font-mono text-xs tracking-[0.08em] text-accent uppercase">{p.name}</span>
         <h3 className="text-[clamp(30px,3.6vw,48px)] font-bold">{p.problem}</h3>
         <p className="max-w-[46ch] text-[17px] text-muted-foreground">{p.answer}</p>
-        <p className="max-w-[52ch] font-mono text-[12.5px] leading-relaxed text-muted-foreground">
-          <span className="text-foreground">We build:</span> {p.builds.join(' · ')}
-        </p>
+        <div className="grid gap-2.5">
+          <span className="font-mono text-[11px] tracking-[0.08em] text-muted-foreground uppercase">We build</span>
+          {/* Each item gets a highlighter sweep, left to right, when the pillar is in focus */}
+          <ul className="flex max-w-[56ch] flex-wrap gap-x-1.5 gap-y-2 text-[15px] leading-snug font-medium">
+            {p.builds.map((b, k) => (
+              <li
+                key={b}
+                className="rounded-[3px] bg-[linear-gradient(color-mix(in_srgb,var(--accent)_17%,transparent),color-mix(in_srgb,var(--accent)_17%,transparent))] bg-left bg-no-repeat px-1.5 py-0.5 text-foreground transition-[background-size] duration-500 ease-out [box-decoration-break:clone]"
+                style={{
+                  backgroundSize: active ? '100% 100%' : '0% 100%',
+                  transitionDelay: active ? `${150 + k * 90}ms` : '0ms',
+                }}
+              >
+                {b}
+              </li>
+            ))}
+          </ul>
+        </div>
         {/* Mobile and tablet: the scene sits under its copy */}
         <div className="mt-2 lg:hidden">
           <Panel index={i} />
