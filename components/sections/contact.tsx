@@ -46,12 +46,12 @@ export function Contact() {
     <section id="contact" className="scroll-mt-20 pb-[clamp(72px,10vw,128px)]">
       <div className="container-site">
         <Reveal y={40}>
-        <div className="grid overflow-hidden rounded-2xl border border-border bg-surface shadow-[0_30px_70px_-40px_rgba(22,26,38,0.3)] md:grid-cols-[1fr_1.1fr]">
+        <div className="grid overflow-hidden rounded-2xl border border-border bg-surface shadow-[0_30px_70px_-40px_rgba(var(--shadow),0.3)] md:grid-cols-[1fr_1.1fr]">
           <div className="grid min-w-0 content-between gap-8 bg-[linear-gradient(150deg,var(--accent-soft),var(--surface)_85%)] p-[clamp(28px,4vw,48px)]">
             <div className="grid gap-4">
               <span className="eyebrow">Contact</span>
               <h2 className="text-[clamp(30px,4vw,46px)] font-bold">Tell us what’s slowing you down.</h2>
-              <p className="text-muted-foreground">We reply within one working day with first ideas and a cost estimate.</p>
+              <p className="text-muted-foreground">Send us a message and we’ll get back to you with first ideas and next steps.</p>
             </div>
             <dl className="grid gap-3.5">
               {[

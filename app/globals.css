@@ -2,7 +2,7 @@
 @import 'tw-animate-css';
 @import 'shadcn/tailwind.css';
 
-/* itrate: calm, light clean tech. Light only by design. */
+/* itrate: calm clean tech. Always light by default; dark only when chosen with the navbar switch. */
 :root {
   --bg: #f7f8fa;
   --surface: #ffffff;
@@ -13,7 +13,29 @@
   --accent-soft: #eef2fd;
   --accent-ink: #ffffff;
   --ok: #1f9d6b;
+  --shadow: 22, 26, 38;
+  /* "Maturing" word: young → mature */
+  --m0: #a9b9f3;
+  --m1: #3a5bd9;
+  --m2: #1a2266;
   color-scheme: light;
+}
+
+:root[data-theme='dark'] {
+  --bg: #0c0f17;
+  --surface: #131826;
+  --ink: #e9ecf4;
+  --muted: #98a0b5;
+  --line: #242b3d;
+  --accent: #6b85ff;
+  --accent-soft: #1a2244;
+  --accent-ink: #ffffff;
+  --ok: #3cc58c;
+  --shadow: 0, 0, 0;
+  --m0: #34427a;
+  --m1: #6b85ff;
+  --m2: #cdd7ff;
+  color-scheme: dark;
 }
 
 @theme inline {

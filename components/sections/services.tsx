@@ -54,7 +54,7 @@ const pillars: Pillar[] = [
 function Panel({ index }: { index: number }) {
   const p = pillars[index]
   return (
-    <div className="overflow-hidden rounded-2xl border border-border bg-background shadow-[0_40px_80px_-40px_rgba(22,26,38,0.35)]">
+    <div className="overflow-hidden rounded-2xl border border-border bg-background shadow-[0_40px_80px_-40px_rgba(var(--shadow),0.35)]">
       <div className="flex items-center gap-2 border-b border-border bg-surface px-4 py-2.5">
         {[0, 1, 2].map((i) => (
           <span key={i} className="size-2.5 rounded-full bg-border" />

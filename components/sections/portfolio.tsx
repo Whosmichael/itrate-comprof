@@ -91,7 +91,7 @@ function Shot({ p }: { p: Project }) {
       className="group block min-w-0"
       aria-label={`Visit the ${p.name} website (opens in a new tab)`}
     >
-      <div className="overflow-hidden rounded-xl border border-border bg-surface shadow-[0_30px_60px_-34px_rgba(22,26,38,0.35)] transition-[box-shadow,transform] duration-500 group-hover:-translate-y-1 group-hover:shadow-[0_40px_80px_-34px_rgba(58,91,217,0.45)]">
+      <div className="overflow-hidden rounded-xl border border-border bg-surface shadow-[0_30px_60px_-34px_rgba(var(--shadow),0.35)] transition-[box-shadow,transform] duration-500 group-hover:-translate-y-1 group-hover:shadow-[0_40px_80px_-34px_rgba(58,91,217,0.45)]">
         <div className="flex items-center gap-2 border-b border-border px-3.5 py-2.5">
           {[0, 1, 2].map((i) => (
             <span key={i} className="size-2.5 rounded-full bg-border" />

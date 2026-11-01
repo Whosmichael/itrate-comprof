@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { Menu, X } from 'lucide-react'
 import { buttonVariants } from '@/components/ui/button'
 import { Logo } from '@/components/layout/logo'
+import { ThemeToggle } from '@/components/layout/theme-toggle'
 import { navItems } from '@/lib/site'
 
 export function Navbar() {
@@ -27,6 +28,7 @@ export function Navbar() {
         </nav>
 
         <div className="flex items-center gap-2">
+          <ThemeToggle />
           <a href="#contact" className={buttonVariants({ className: 'hidden sm:inline-flex' })}>
             Free Consultation
           </a>

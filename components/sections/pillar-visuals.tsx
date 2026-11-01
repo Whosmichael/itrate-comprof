@@ -46,12 +46,12 @@ export function SearchScene() {
           </div>
         </motion.div>
 
-        <motion.div {...rise(1.3)} className="relative overflow-hidden rounded-lg border border-border bg-[#eef1f6]">
+        <motion.div {...rise(1.3)} className="relative overflow-hidden rounded-lg border border-border bg-accent-soft">
           <svg viewBox="0 0 120 110" className="absolute inset-0 size-full" aria-hidden>
-            <path d="M0 70 Q40 60 60 75 T120 65" stroke="#fff" strokeWidth="7" fill="none" />
-            <path d="M45 0 Q50 50 40 110" stroke="#fff" strokeWidth="5" fill="none" />
-            <path d="M0 30 L120 38" stroke="#fff" strokeWidth="3" fill="none" />
-            <rect x="72" y="8" width="30" height="20" rx="3" fill="#dfe8d8" />
+            <path d="M0 70 Q40 60 60 75 T120 65" stroke="var(--surface)" strokeWidth="7" fill="none" />
+            <path d="M45 0 Q50 50 40 110" stroke="var(--surface)" strokeWidth="5" fill="none" />
+            <path d="M0 30 L120 38" stroke="var(--surface)" strokeWidth="3" fill="none" />
+            <rect x="72" y="8" width="30" height="20" rx="3" fill="color-mix(in srgb, var(--ok) 25%, transparent)" />
           </svg>
           <motion.div
             className="absolute top-[34%] left-[52%] -translate-x-1/2 -translate-y-full text-accent"
@@ -59,7 +59,7 @@ export function SearchScene() {
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 1.6, type: 'spring', stiffness: 400, damping: 12 }}
           >
-            <MapPin className="size-7 fill-accent stroke-white" />
+            <MapPin className="size-7 fill-accent stroke-surface" />
           </motion.div>
           <motion.span
             className="absolute top-[34%] left-[52%] size-3 -translate-x-1/2 rounded-full bg-accent/30"
@@ -207,7 +207,7 @@ const log = [
   ['06:30', 'Security updates applied'],
   ['09:14', 'SSL certificate renewed'],
   ['13:30', 'v1.4 shipped: new menu page'],
-  ['15:02', 'Replied to your WhatsApp in 6 min'],
+  ['15:02', 'Answered your WhatsApp request'],
 ]
 
 export function MaintainScene() {

@@ -416,7 +416,7 @@ export function Hero() {
                   animate={{ opacity: 1, y: 0, scale: 1 }}
                   exit={{ opacity: 0, y: -8, scale: 0.95 }}
                   transition={{ type: 'spring', stiffness: 300, damping: 22, delay: 0.5 }}
-                  className="flex items-center gap-2.5 rounded-lg border border-border bg-surface px-3.5 py-2.5 text-[13px] font-medium shadow-[0_16px_40px_-16px_rgba(22,26,38,0.3)]"
+                  className="flex items-center gap-2.5 rounded-lg border border-border bg-surface px-3.5 py-2.5 text-[13px] font-medium shadow-[0_16px_40px_-16px_rgba(var(--shadow),0.3)]"
                 >
                   <span className="grid size-6 place-items-center rounded-full bg-ok/15 text-[11px] text-ok">✓</span>
                   <span>

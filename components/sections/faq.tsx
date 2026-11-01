@@ -1,7 +1,6 @@
 import { Reveal } from '@/components/motion/reveal'
 import { SectionHead } from './section-head'
 
-// TODO: confirm the timeline and revision answers match how itrate actually works.
 const faqs = [
   {
     q: 'I’m not sure what I need. Can you help?',
@@ -9,7 +8,7 @@ const faqs = [
   },
   {
     q: 'How long does a project take?',
-    a: 'A company website usually goes live 2–3 weeks after we have your content. Custom systems and automations depend on scope, and we agree a timeline before we start.',
+    a: 'It depends on what we’re building. After Discover, we agree a timeline with you before any work starts, and you see progress along the way.',
   },
   {
     q: 'I don’t have photos or much content yet. Is that okay?',
