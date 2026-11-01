@@ -1,10 +1,11 @@
 const points = [
-  'Designed around your brand',
-  'Looks right on phone and laptop',
-  'Connected to WhatsApp',
-  'Domain & hosting handled',
-  'You fully own your site',
+  'Websites',
+  'Custom systems',
+  'AI automations',
+  'Hosting & maintenance',
+  'You own everything we build',
   'Improved after launch',
+  'Support on WhatsApp',
 ]
 
 // Slow endless marquee. The list is rendered twice so the loop is seamless.

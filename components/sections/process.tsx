@@ -9,11 +9,11 @@ import { SectionHead } from './section-head'
 const steps = [
   {
     title: 'Discover',
-    text: 'We learn your business and customers. Already have a website or social pages? We review them and advise on what to improve.',
+    text: 'We learn how your business works today. Already using some tools? We review them and advise on what to improve.',
   },
   { title: 'Design', text: 'We design the look. You review and give feedback before anything is built.' },
-  { title: 'Build', text: 'The design becomes a fast site that works on every device.' },
-  { title: 'Launch', text: 'Your site goes live on your domain, and we walk you through it.' },
+  { title: 'Build', text: 'We build it to work fast and reliably, on every device your team uses.' },
+  { title: 'Ship', text: 'It goes live, and we walk you and your team through it.' },
   { title: 'Iterate', text: 'We improve the site based on your input. Then back to step 1.' },
 ]
 
@@ -30,7 +30,7 @@ export function Process() {
         <SectionHead
           eyebrow="Process"
           title="Five steps, then repeat."
-          lead="Your website isn’t finished on launch day. Once it’s live, we look at what works and keep improving it."
+          lead="Website, system, or automation: nothing is finished on launch day. Once it’s live, we look at what works and keep improving it."
         />
 
         <ol ref={ref} className="relative grid gap-10 lg:grid-cols-5 lg:gap-6">

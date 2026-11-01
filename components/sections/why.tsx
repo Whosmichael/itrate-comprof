@@ -3,10 +3,10 @@ import { Reveal } from '@/components/motion/reveal'
 import { SectionHead } from './section-head'
 
 const reasons = [
-  { icon: Clock, title: 'Live fast', text: 'Version one ships first, so customers can find you sooner.' },
+  { icon: Clock, title: 'Ship fast', text: 'Version one goes live first, so you get value sooner.' },
   { icon: MessageCircle, title: 'Plain language', text: 'No confusing tech jargon. We explain every step.' },
   { icon: KeyRound, title: 'Yours to keep', text: 'Domain, content, and access are in your name. Nothing is locked in.' },
-  { icon: LifeBuoy, title: 'Ongoing support', text: 'After launch, we are still here for changes and new features.' },
+  { icon: LifeBuoy, title: 'We stay', text: 'Other vendors disappear after launch. We keep it running and improving.' },
 ]
 
 export function Why() {

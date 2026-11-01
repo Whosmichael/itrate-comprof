@@ -6,9 +6,10 @@ import { buttonVariants } from '@/components/ui/button'
 import { Reveal } from '@/components/motion/reveal'
 
 const needs = [
-  'Company profile website',
-  'Landing page',
-  'Website care',
+  'A website',
+  'A custom system',
+  'An AI automation',
+  'Maintenance for something I already have',
   'Not sure yet, want to talk',
 ]
 
@@ -49,7 +50,7 @@ export function Contact() {
           <div className="grid min-w-0 content-between gap-8 bg-[linear-gradient(150deg,var(--accent-soft),var(--surface)_85%)] p-[clamp(28px,4vw,48px)]">
             <div className="grid gap-4">
               <span className="eyebrow">Contact</span>
-              <h2 className="text-[clamp(30px,4vw,46px)] font-bold">Tell us about your business.</h2>
+              <h2 className="text-[clamp(30px,4vw,46px)] font-bold">Tell us what’s slowing you down.</h2>
               <p className="text-muted-foreground">We reply within one working day with first ideas and a cost estimate.</p>
             </div>
             <dl className="grid gap-3.5">

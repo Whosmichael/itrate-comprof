@@ -20,9 +20,9 @@ const code = JetBrains_Mono({
 })
 
 export const metadata: Metadata = {
-  title: 'itrate | Company Profile Websites for Small Businesses',
+  title: 'itrate | Build. Ship. Iterate.',
   description:
-    'itrate builds company profile websites for Indonesian small businesses. Launch fast, then keep improving.',
+    'itrate is the tech team for small businesses: websites, custom systems, and AI automations, built, shipped, and looked after for you.',
   icons: {
     icon: [
       { url: '/icon-light-32x32.png', media: '(prefers-color-scheme: light)' },

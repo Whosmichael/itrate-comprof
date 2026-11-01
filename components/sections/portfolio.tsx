@@ -28,7 +28,7 @@ const projects: Project[] = [
     domain: 'hoetyberkahsolusindo.com',
     image: '/work/hoety-berkah-solusindo.webp',
     height: 2166,
-    meta: ['Industrial refrigeration', 'Bekasi'],
+    meta: ['Industrial refrigeration', 'Website + product catalog'],
     summary:
       'Company profile for a cold storage and refrigeration contractor serving businesses across Jabodetabek.',
     built: [
@@ -43,7 +43,7 @@ const projects: Project[] = [
     domain: 'poly-board-games-cafe.vercel.app',
     image: '/work/poly-board-games-cafe.webp',
     height: 2166,
-    meta: ['Cafe & entertainment', 'Next.js'],
+    meta: ['Cafe & entertainment', 'Website + booking system'],
     summary:
       'A playful site for a board game cafe: its Game Master service, a searchable game catalog, and table bookings.',
     built: [
@@ -58,7 +58,7 @@ const projects: Project[] = [
     domain: 'cherishedvoices.com',
     image: '/work/cherished-voices.webp',
     height: 750,
-    meta: ['Weddings & events', 'React + Supabase'],
+    meta: ['Weddings & events', 'Website + event calendar'],
     summary:
       'A premium site for an audio & video guestbook service at weddings, corporate galas, and milestone celebrations.',
     built: [
@@ -130,8 +130,8 @@ export function Portfolio() {
     <section id="work" className="section scroll-mt-20 border-y border-border bg-surface">
       <div className="container-site">
         <SectionHead
-          eyebrow="Work"
-          title="Websites we have built and launched."
+          eyebrow="Projects"
+          title="Things we have built and shipped."
           lead="Real businesses, live today. Every project starts simple, then grows as the client needs more."
         />
 

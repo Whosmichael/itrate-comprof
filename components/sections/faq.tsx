@@ -4,8 +4,12 @@ import { SectionHead } from './section-head'
 // TODO: confirm the timeline and revision answers match how itrate actually works.
 const faqs = [
   {
-    q: 'How long until my website is ready?',
-    a: 'It depends on the pages and features. A company profile site usually goes live 2–3 weeks after we have all your content.',
+    q: 'I’m not sure what I need. Can you help?',
+    a: 'Yes, that’s what Discover is for. We look at how you work today and suggest the simplest thing that helps. Sometimes that’s a website, sometimes a small system or an automation.',
+  },
+  {
+    q: 'How long does a project take?',
+    a: 'A company website usually goes live 2–3 weeks after we have your content. Custom systems and automations depend on scope, and we agree a timeline before we start.',
   },
   {
     q: 'I don’t have photos or much content yet. Is that okay?',
@@ -16,8 +20,8 @@ const faqs = [
     a: 'Design revisions happen before we build, so big changes are settled early. The number of rounds is agreed in the quote.',
   },
   {
-    q: 'Who owns the website when it’s done?',
-    a: 'You do. The domain and content are in your business’s name. If you want us to look after it afterwards, we offer ongoing care: hosting, backups, and regular updates.',
+    q: 'Who owns what you build?',
+    a: 'You do. Domains, accounts, data, and content are in your business’s name. If you want us to look after it afterwards, we offer ongoing care: hosting, backups, and regular updates.',
   },
   {
     q: 'Can it connect to WhatsApp and Instagram?',
