@@ -5,13 +5,13 @@ import {
   AnimatePresence,
   motion,
   useMotionValue,
-  useReducedMotion,
   useSpring,
   useTransform,
   type Variants,
 } from 'framer-motion'
 import { ArrowRight } from 'lucide-react'
 import { buttonVariants } from '@/components/ui/button'
+import { useReducedMotionSafe } from '@/lib/use-reduced-motion'
 
 // Each version adds something to the mock site, like a real client project.
 const versions = [
@@ -50,10 +50,7 @@ const pop = {
 
 export function Hero() {
   // Only honour reduced motion after mount, so server and first client render match.
-  const prefersReduced = useReducedMotion()
-  const [mounted, setMounted] = useState(false)
-  useEffect(() => setMounted(true), [])
-  const reduce = mounted && !!prefersReduced
+  const reduce = useReducedMotionSafe()
   const [stage, setStage] = useState(0)
 
   // Cycle v1.0 → v1.1 → v1.2, hold, then start again. Reduced motion shows the finished site.

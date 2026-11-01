@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { site, whatsappLink } from '@/lib/site'
 import { buttonVariants } from '@/components/ui/button'
+import { Reveal } from '@/components/motion/reveal'
 
 const needs = [
   'Company profile website',
@@ -41,14 +42,15 @@ export function Contact() {
   }
 
   return (
-    <section id="contact" className="scroll-mt-20 pb-[clamp(64px,9vw,112px)]">
+    <section id="contact" className="scroll-mt-20 pb-[clamp(72px,10vw,128px)]">
       <div className="container-site">
-        <div className="grid overflow-hidden rounded-[10px] border border-border bg-surface md:grid-cols-[1fr_1.1fr]">
-          <div className="grid min-w-0 content-between gap-6 bg-accent p-[clamp(28px,4vw,48px)] text-accent-foreground">
+        <Reveal y={40}>
+        <div className="grid overflow-hidden rounded-2xl border border-border bg-surface shadow-[0_30px_70px_-40px_rgba(22,26,38,0.3)] md:grid-cols-[1fr_1.1fr]">
+          <div className="grid min-w-0 content-between gap-8 bg-[linear-gradient(150deg,var(--accent-soft),var(--surface)_85%)] p-[clamp(28px,4vw,48px)]">
             <div className="grid gap-4">
-              <span className="font-mono text-xs tracking-[0.08em] uppercase opacity-80">Contact</span>
+              <span className="eyebrow">Contact</span>
               <h2 className="text-[clamp(30px,4vw,46px)] font-bold">Tell us about your business.</h2>
-              <p className="opacity-85">We reply within one working day with first ideas and a cost estimate.</p>
+              <p className="text-muted-foreground">We reply within one working day with first ideas and a cost estimate.</p>
             </div>
             <dl className="grid gap-3.5">
               {[
@@ -57,7 +59,7 @@ export function Contact() {
                 ['Location', site.location],
               ].map(([k, v]) => (
                 <div key={k} className="grid gap-0.5">
-                  <dt className="font-mono text-xs tracking-[0.08em] uppercase opacity-75">{k}</dt>
+                  <dt className="font-mono text-xs tracking-[0.08em] text-muted-foreground uppercase">{k}</dt>
                   <dd className="text-lg font-semibold select-all">{v}</dd>
                 </div>
               ))}
@@ -93,6 +95,7 @@ export function Contact() {
             {error && <p className="text-sm text-accent" role="alert">{error}</p>}
           </form>
         </div>
+        </Reveal>
       </div>
     </section>
   )

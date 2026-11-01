@@ -1,3 +1,9 @@
+'use client'
+
+import { useRef } from 'react'
+import { motion, useScroll, useSpring } from 'framer-motion'
+import { useReducedMotionSafe } from '@/lib/use-reduced-motion'
+import { Reveal } from '@/components/motion/reveal'
 import { SectionHead } from './section-head'
 
 const steps = [
@@ -12,6 +18,12 @@ const steps = [
 ]
 
 export function Process() {
+  const ref = useRef<HTMLOListElement>(null)
+  const reduce = useReducedMotionSafe()
+  // The progress line fills as the steps scroll through the viewport.
+  const { scrollYProgress } = useScroll({ target: ref, offset: ['start 85%', 'end 55%'] })
+  const fill = useSpring(scrollYProgress, { stiffness: 80, damping: 20 })
+
   return (
     <section id="process" className="section scroll-mt-20">
       <div className="container-site">
@@ -20,24 +32,49 @@ export function Process() {
           title="Five steps, then repeat."
           lead="Your website isn’t finished on launch day. Once it’s live, we look at what works and keep improving it."
         />
-        <ol className="grid rounded-md border border-border bg-surface lg:grid-cols-5">
+
+        <ol ref={ref} className="relative grid gap-10 lg:grid-cols-5 lg:gap-6">
+          {/* Track and animated fill: vertical on mobile, horizontal on desktop */}
+          <span aria-hidden className="absolute top-2 bottom-2 left-[15px] w-px bg-border lg:top-[15px] lg:right-4 lg:bottom-auto lg:left-4 lg:h-px lg:w-auto" />
+          <motion.span
+            aria-hidden
+            style={{ scaleY: reduce ? 1 : fill }}
+            className="absolute top-2 bottom-2 left-[15px] w-px origin-top bg-accent lg:hidden"
+          />
+          <motion.span
+            aria-hidden
+            style={{ scaleX: reduce ? 1 : fill }}
+            className="absolute top-[15px] right-4 left-4 hidden h-px origin-left bg-accent lg:block"
+          />
+
           {steps.map((s, i) => (
-            <li
-              key={s.title}
-              className="grid min-w-0 content-start gap-2.5 border-b border-border px-6 pt-7 pb-8 last:border-b-0 last:bg-accent-soft lg:border-r lg:border-b-0 lg:last:border-r-0"
-            >
-              <span className="font-mono text-[13px] font-medium text-accent">{String(i + 1).padStart(2, '0')}</span>
-              <h3 className="text-[21px] font-bold">{s.title}</h3>
+            <Reveal as="li" key={s.title} delay={i * 0.08} className="relative grid min-w-0 content-start gap-3 pl-12 lg:pl-0">
+              <span className="absolute top-0 left-0 grid size-[31px] place-items-center rounded-full border border-accent/30 bg-surface font-mono text-[12px] font-medium text-accent shadow-[0_0_0_6px_var(--bg)] lg:relative">
+                {String(i + 1).padStart(2, '0')}
+              </span>
+              <h3 className="text-[21px] font-bold lg:mt-3">{s.title}</h3>
               <p className="text-[15px] text-muted-foreground">{s.text}</p>
-            </li>
+            </Reveal>
           ))}
         </ol>
-        <p className="mt-4 flex items-center gap-2.5 font-mono text-[13px] text-muted-foreground">
-          <svg width="34" height="16" viewBox="0 0 34 16" fill="none" aria-hidden>
-            <path d="M32 4H6m0 0 4-3M6 4l4 3M32 4v8H2" stroke="currentColor" strokeWidth="1.5" />
-          </svg>
-          v1.0 → v1.1 → v1.2 → …
-        </p>
+
+        <Reveal delay={0.3}>
+          <p className="mt-12 inline-flex items-center gap-2.5 rounded-full border border-border bg-surface px-4 py-2 font-mono text-[13px] text-muted-foreground">
+            <motion.svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              aria-hidden
+              animate={reduce ? undefined : { rotate: 360 }}
+              transition={{ duration: 8, repeat: Infinity, ease: 'linear' }}
+              className="text-accent"
+            >
+              <path d="M20 12a8 8 0 1 1-2.34-5.66M20 4v4h-4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+            </motion.svg>
+            v1.0 → v1.1 → v1.2 → …
+          </p>
+        </Reveal>
       </div>
     </section>
   )

@@ -2,33 +2,18 @@
 @import 'tw-animate-css';
 @import 'shadcn/tailwind.css';
 
-/* itrate: clean tech. Light-first, follows the OS dark setting. */
+/* itrate: calm, light clean tech. Light only by design. */
 :root {
-  --bg: #f7f8fb;
+  --bg: #f7f8fa;
   --surface: #ffffff;
-  --ink: #0e1220;
-  --muted: #5a6278;
-  --line: #e2e5ee;
-  --accent: #2346ff;
-  --accent-soft: #e7ecff;
+  --ink: #161a26;
+  --muted: #5f6779;
+  --line: #e4e7ee;
+  --accent: #3a5bd9;
+  --accent-soft: #eef2fd;
   --accent-ink: #ffffff;
-  --ok: #12925b;
+  --ok: #1f9d6b;
   color-scheme: light;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #0b0e17;
-    --surface: #121625;
-    --ink: #eef0f7;
-    --muted: #9aa2ba;
-    --line: #232a3e;
-    --accent: #5c78ff;
-    --accent-soft: #1a2250;
-    --accent-ink: #ffffff;
-    --ok: #3cc98a;
-    color-scheme: dark;
-  }
 }
 
 @theme inline {
@@ -90,7 +75,7 @@
     @apply mx-auto w-full max-w-[1160px] px-4 sm:px-6;
   }
   .section {
-    padding-block: clamp(64px, 9vw, 112px);
+    padding-block: clamp(72px, 10vw, 128px);
   }
   .eyebrow {
     @apply font-mono text-xs uppercase tracking-[0.08em] text-accent;
@@ -100,74 +85,16 @@
     font-size: clamp(17px, 1.6vw, 19px);
     max-width: 58ch;
   }
-
-  /* Portfolio thumbnail: Poly Board Games Cafe (fixed brand colors, same in both themes) */
-  .t-poly {
-    background: #fff4e0;
-    padding: 7%;
-    display: grid;
-    grid-template-rows: auto auto 1fr;
-    gap: 6%;
-  }
-  .t-poly .brand {
-    font: 800 clamp(14px, 2.2vw, 22px) / 1 var(--font-display);
-    color: #1f2a44;
-  }
-  .t-poly .brand span { color: #e5502e; }
-  .t-poly .pill {
-    background: #1f2a44;
-    color: #fff4e0;
-    font-size: 10px;
-    font-weight: 600;
-    padding: 5px 10px;
-    border-radius: 999px;
-  }
-  .t-poly .filters { display: flex; gap: 6px; }
-  .t-poly .filters i { height: 16px; width: 52px; border-radius: 999px; background: #f6d9a8; }
-  .t-poly .filters i:first-child { background: #e5502e; }
-  .t-poly .games { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; }
-  .t-poly .games i { border-radius: 5px; }
-  .t-poly .games i:nth-child(5n + 1) { background: #e5502e; }
-  .t-poly .games i:nth-child(5n + 2) { background: #2e8b6e; }
-  .t-poly .games i:nth-child(5n + 3) { background: #f2b134; }
-  .t-poly .games i:nth-child(5n + 4) { background: #3a5ba9; }
-  .t-poly .games i:nth-child(5n) { background: #1f2a44; }
-
-  /* Portfolio thumbnail: Cherished Voices */
-  .t-cher {
-    background: linear-gradient(160deg, #2a1e1a, #120d0c 70%);
-    padding: 7%;
-    display: grid;
-    grid-template-columns: 1.2fr 1fr;
-    gap: 6%;
-    align-items: center;
-  }
-  .t-cher .copy { display: grid; gap: 10px; }
-  .t-cher .script {
-    font: italic 500 clamp(16px, 2.6vw, 26px) / 1.1 Georgia, 'Times New Roman', serif;
-    color: #f3e3c7;
-  }
-  .t-cher .line { height: 6px; border-radius: 3px; background: #4a3a30; width: 80%; }
-  .t-cher .line.s { width: 55%; }
-  .t-cher .gold { margin-top: 6px; width: 46%; height: 20px; border-radius: 999px; background: #c9a15b; }
-  .t-cher .cal {
-    background: #1c1513;
-    border: 1px solid #3a2c25;
-    border-radius: 6px;
-    padding: 8%;
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    gap: 4px;
-  }
-  .t-cher .cal i { aspect-ratio: 1; border-radius: 2px; background: #2c221e; }
-  .t-cher .cal i.e { background: #c9a15b; }
-  .t-cher .cal i.h { background: transparent; outline: 1px solid #c9a15b; outline-offset: -1px; }
 }
 
-@keyframes rise {
-  from { transform: translateY(10px); opacity: 0; }
-  to { transform: none; opacity: 1; }
+/* Slow, endless marquee for the value strip */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
 }
-.animate-rise {
-  animation: rise 0.8s 0.4s both;
+.animate-marquee {
+  animation: marquee 40s linear infinite;
+}
+.group:hover .animate-marquee {
+  animation-play-state: paused;
 }

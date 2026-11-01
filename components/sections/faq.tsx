@@ -1,3 +1,4 @@
+import { Reveal } from '@/components/motion/reveal'
 import { SectionHead } from './section-head'
 
 // TODO: confirm the timeline and revision answers match how itrate actually works.
@@ -31,15 +32,17 @@ export function Faq() {
         <SectionHead eyebrow="FAQ" title="Common questions." className="mb-0 content-start" />
         <div className="min-w-0 border-t border-border">
           {faqs.map((f, i) => (
-            <details key={f.q} open={i === 0} className="group border-b border-border">
+            <Reveal key={f.q} delay={i * 0.06} y={16}>
+            <details open={i === 0} className="group border-b border-border">
               <summary className="flex cursor-pointer list-none justify-between gap-5 py-5.5 text-[17px] font-semibold [&::-webkit-details-marker]:hidden">
                 {f.q}
                 <span aria-hidden className="font-mono text-[22px] leading-none font-normal text-accent transition-transform group-open:rotate-45">
                   +
                 </span>
               </summary>
-              <p className="max-w-[62ch] pb-5.5 text-muted-foreground">{f.a}</p>
+              <p className="max-w-[62ch] pb-5.5 text-muted-foreground animate-in fade-in slide-in-from-top-1 duration-300">{f.a}</p>
             </details>
+            </Reveal>
           ))}
         </div>
       </div>
