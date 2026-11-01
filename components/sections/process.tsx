@@ -14,7 +14,7 @@ const steps = [
   { title: 'Design', text: 'We design the look. You review and give feedback before anything is built.' },
   { title: 'Build', text: 'We build it to work fast and reliably, on every device your team uses.' },
   { title: 'Ship', text: 'It goes live, and we walk you and your team through it.' },
-  { title: 'Iterate', text: 'We improve the site based on your input. Then back to step 1.' },
+  { title: 'Iterate', text: 'We improve what we’ve built based on your input. Then back to step 1.' },
 ]
 
 export function Process() {
