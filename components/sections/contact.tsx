@@ -78,6 +78,14 @@ export function Contact() {
                   </dd>
                 </div>
                 <div className="grid gap-0.5">
+                  <dt className="font-mono text-xs tracking-[0.08em] text-muted-foreground uppercase">Instagram</dt>
+                  <dd className="text-lg font-semibold">
+                    <a href={site.instagramUrl} target="_blank" rel="noopener noreferrer" className="hover:text-accent">
+                      @{site.instagram}
+                    </a>
+                  </dd>
+                </div>
+                <div className="grid gap-0.5">
                   <dt className="font-mono text-xs tracking-[0.08em] text-muted-foreground uppercase">Location</dt>
                   <dd className="text-lg font-semibold">{site.location}</dd>
                 </div>

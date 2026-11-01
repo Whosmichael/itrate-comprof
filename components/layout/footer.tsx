@@ -10,7 +10,12 @@ export function Footer() {
         <span>
           © {new Date().getFullYear()} <Wordmark className="group" /> {site.tagline}.
         </span>
-        <span className="font-mono text-xs">site v1.0</span>
+        <span className="flex items-center gap-5">
+          <a href={site.instagramUrl} target="_blank" rel="noopener noreferrer" className="hover:text-foreground">
+            Instagram @{site.instagram}
+          </a>
+          <span className="font-mono text-xs">site v1.0</span>
+        </span>
       </div>
     </footer>
   )

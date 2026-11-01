@@ -5,6 +5,8 @@ export const site = {
   whatsapp: '6281973317513', // international format, no "+" or spaces
   whatsappDisplay: '+62 819-7331-7513',
   email: 'itrate.tech@gmail.com',
+  instagram: 'itrate.tech',
+  instagramUrl: 'https://www.instagram.com/itrate.tech/',
   location: 'Indonesia · working remotely',
 }
 
