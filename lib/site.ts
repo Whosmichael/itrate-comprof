@@ -8,6 +8,8 @@ export const site = {
   location: 'Indonesia · working remotely',
 }
 
+export const DEFAULT_WA_MESSAGE = 'Hi itrate, I’d like to talk about a project.'
+
 export function whatsappLink(message?: string) {
   const base = `https://wa.me/${site.whatsapp}`
   return message ? `${base}?text=${encodeURIComponent(message)}` : base

@@ -57,7 +57,7 @@ const projects: Project[] = [
     url: 'https://www.cherishedvoices.com/',
     domain: 'cherishedvoices.com',
     image: '/work/cherished-voices.webp',
-    height: 750,
+    height: 2166,
     meta: ['Weddings & events', 'Website + event calendar'],
     summary:
       'A premium site for an audio & video guestbook service at weddings, corporate galas, and milestone celebrations.',

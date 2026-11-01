@@ -7,6 +7,7 @@ import { Portfolio } from '@/components/sections/portfolio'
 import { Process } from '@/components/sections/process'
 import { Faq } from '@/components/sections/faq'
 import { Contact } from '@/components/sections/contact'
+import { WhatsAppFloat } from '@/components/layout/whatsapp-float'
 
 export default function Page() {
   return (
@@ -22,6 +23,7 @@ export default function Page() {
         <Contact />
       </main>
       <Footer />
+      <WhatsAppFloat />
     </>
   )
 }
