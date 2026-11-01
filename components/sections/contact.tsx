@@ -1,147 +1,99 @@
 'use client'
 
-import { motion } from 'framer-motion'
-import { Button } from '@/components/ui/button'
-import { Mail, MessageCircle, Calendar } from 'lucide-react'
+import { useState } from 'react'
+import { site, whatsappLink } from '@/lib/site'
+import { buttonVariants } from '@/components/ui/button'
 
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.15,
-      delayChildren: 0.2,
-    },
-  },
-}
-
-const cardVariants = {
-  hidden: { opacity: 0, y: 30 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.6, ease: 'easeOut' },
-  },
-}
-
-const engagementCards = [
-  {
-    icon: MessageCircle,
-    title: 'Chat on WhatsApp',
-    description: 'Quick questions? Reach us instantly on WhatsApp for real-time support.',
-    buttonText: 'Start Chat',
-    href: 'https://wa.me/1234567890',
-    color: 'from-emerald-600 to-emerald-700',
-  },
-  {
-    icon: Mail,
-    title: 'Send an Email',
-    description: 'Share details about your project. We&apos;ll respond within 24 hours.',
-    buttonText: 'Email Us',
-    href: 'mailto:hello@synergylabs.com',
-    color: 'from-indigo-600 to-indigo-700',
-  },
-  {
-    icon: Calendar,
-    title: 'Schedule a Call',
-    description: 'Book a meeting with our team directly. No back-and-forth emails.',
-    buttonText: 'Book Now',
-    href: 'https://cal.com/synergylabs',
-    color: 'from-violet-600 to-violet-700',
-  },
+const needs = [
+  'Company profile website',
+  'Landing page',
+  'Brand basics',
+  'Website care',
+  'Not sure yet, want to talk',
 ]
 
+const input =
+  'w-full rounded-md border border-border bg-background px-3.5 py-3 text-[15px] text-foreground focus:border-transparent focus:outline-2 focus:outline-accent'
+
 export function Contact() {
+  const [error, setError] = useState('')
+
+  // Builds a pre-filled WhatsApp message from the form and opens the chat.
+  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault()
+    const data = new FormData(e.currentTarget)
+    const name = String(data.get('name') ?? '').trim()
+    if (!name) {
+      setError('Please add your name first.')
+      return
+    }
+    setError('')
+    const biz = String(data.get('biz') ?? '').trim()
+    const need = String(data.get('need') ?? '')
+    const msg = String(data.get('msg') ?? '').trim()
+    const text = [
+      `Hi itrate, I’m ${name}${biz ? ` from ${biz}` : ''}.`,
+      `I’m interested in: ${need}.`,
+      msg && `\n${msg}`,
+    ]
+      .filter(Boolean)
+      .join('\n')
+    window.open(whatsappLink(text), '_blank', 'noopener')
+  }
+
   return (
-    <section id="contact" className="scroll-mt-20 py-20 px-4 md:py-32">
-      <div className="max-w-6xl mx-auto">
-        {/* Header */}
-        <motion.div
-          className="text-center mb-16"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-100px' }}
-          transition={{ duration: 0.8 }}
-        >
-          <h2 className="heading-lg mb-4 font-display text-balance">
-            Let&apos;s Get in Touch
-          </h2>
-          <p className="text-foreground/70 max-w-2xl mx-auto text-lg">
-            Choose your preferred way to connect. We&apos;re ready to discuss how we can transform your vision.
-          </p>
-        </motion.div>
-
-        {/* Engagement Cards Grid */}
-        <motion.div
-          className="grid md:grid-cols-3 gap-6 lg:gap-8"
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: '-100px' }}
-        >
-          {engagementCards.map((card) => {
-            const Icon = card.icon
-            return (
-              <motion.div
-                key={card.title}
-                variants={cardVariants}
-                className="group relative overflow-hidden rounded-2xl bg-muted/40 backdrop-blur-sm border border-white/10 hover:border-white/20 transition-all duration-300 p-8 hover:shadow-2xl hover:shadow-indigo-500/10"
-              >
-                {/* Glassmorphic Glow Effect on Hover */}
-                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <div className={`absolute -inset-1/2 bg-gradient-to-r ${card.color} blur-3xl opacity-20 animate-pulse`} />
+    <section id="contact" className="scroll-mt-20 pb-[clamp(64px,9vw,112px)]">
+      <div className="container-site">
+        <div className="grid overflow-hidden rounded-[10px] border border-border bg-surface md:grid-cols-[1fr_1.1fr]">
+          <div className="grid min-w-0 content-between gap-6 bg-accent p-[clamp(28px,4vw,48px)] text-accent-foreground">
+            <div className="grid gap-4">
+              <span className="font-mono text-xs tracking-[0.08em] uppercase opacity-80">Contact</span>
+              <h2 className="text-[clamp(30px,4vw,46px)] font-bold">Tell us about your business.</h2>
+              <p className="opacity-85">We reply within one working day with first ideas and a cost estimate.</p>
+            </div>
+            <dl className="grid gap-3.5">
+              {[
+                ['WhatsApp', site.whatsappDisplay],
+                ['Email', site.email],
+                ['Location', site.location],
+              ].map(([k, v]) => (
+                <div key={k} className="grid gap-0.5">
+                  <dt className="font-mono text-xs tracking-[0.08em] uppercase opacity-75">{k}</dt>
+                  <dd className="text-lg font-semibold select-all">{v}</dd>
                 </div>
+              ))}
+            </dl>
+          </div>
 
-                {/* Content */}
-                <div className="relative z-10 flex flex-col h-full">
-                  {/* Icon */}
-                  <div className={`inline-flex w-fit p-3 rounded-lg bg-gradient-to-br ${card.color} mb-6 group-hover:scale-110 transition-transform duration-300`}>
-                    <Icon className="w-6 h-6 text-white" />
-                  </div>
-
-                  {/* Text Content */}
-                  <h3 className="text-xl font-bold font-display mb-3 group-hover:text-accent transition-colors">
-                    {card.title}
-                  </h3>
-                  <p className="text-foreground/70 text-sm leading-relaxed mb-8 flex-grow">
-                    {card.description}
-                  </p>
-
-                  {/* CTA Button */}
-                  <a href={card.href} target="_blank" rel="noopener noreferrer">
-                    <motion.button
-                      className="w-full py-3 px-4 rounded-lg gradient-accent text-white font-semibold text-sm transition-all duration-200 hover:scale-105 active:scale-95"
-                      whileHover={{ y: -2 }}
-                      whileTap={{ y: 0 }}
-                    >
-                      {card.buttonText}
-                    </motion.button>
-                  </a>
-                </div>
-
-                {/* Border Glow */}
-                <div className="absolute inset-0 rounded-2xl border border-indigo-500/0 group-hover:border-indigo-500/30 transition-colors duration-300 pointer-events-none" />
-              </motion.div>
-            )
-          })}
-        </motion.div>
-
-        {/* Footer CTA */}
-        <motion.div
-          className="mt-16 text-center"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true, margin: '-100px' }}
-          transition={{ duration: 0.8, delay: 0.3 }}
-        >
-          <p className="text-foreground/60 text-sm">
-            Not sure where to start?{' '}
-            <a href="#contact" className="text-accent hover:underline font-medium">
-              Pick any option above
-            </a>
-            {' '}and we&apos;ll guide you from there.
-          </p>
-        </motion.div>
+          <form onSubmit={handleSubmit} noValidate className="grid min-w-0 gap-4 p-[clamp(28px,4vw,48px)]">
+            <div className="grid gap-4 sm:grid-cols-2">
+              <div className="grid gap-1.5">
+                <label htmlFor="f-name" className="text-sm font-semibold">Name</label>
+                <input id="f-name" name="name" placeholder="Budi Santoso" className={input} />
+              </div>
+              <div className="grid gap-1.5">
+                <label htmlFor="f-biz" className="text-sm font-semibold">Business name</label>
+                <input id="f-biz" name="biz" placeholder="Kopi Senja" className={input} />
+              </div>
+            </div>
+            <div className="grid gap-1.5">
+              <label htmlFor="f-need" className="text-sm font-semibold">What you need</label>
+              <select id="f-need" name="need" className={input}>
+                {needs.map((n) => (
+                  <option key={n}>{n}</option>
+                ))}
+              </select>
+            </div>
+            <div className="grid gap-1.5">
+              <label htmlFor="f-msg" className="text-sm font-semibold">Tell us briefly</label>
+              <textarea id="f-msg" name="msg" placeholder="We run a..." className={`${input} min-h-[110px] resize-y`} />
+            </div>
+            <button type="submit" className={buttonVariants({ size: 'lg' })}>
+              Send via WhatsApp
+            </button>
+            {error && <p className="text-sm text-accent" role="alert">{error}</p>}
+          </form>
+        </div>
       </div>
     </section>
   )

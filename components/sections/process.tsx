@@ -1,103 +1,40 @@
-'use client'
+import { SectionHead } from './section-head'
 
-import { motion } from 'framer-motion'
-
-const processSteps = [
-  {
-    number: '01',
-    title: 'Discovery & Analysis',
-    description:
-      'We analyze your business needs and technical requirements to create a tailored roadmap.',
-  },
-  {
-    number: '02',
-    title: 'Design & Planning',
-    description:
-      'Our architects design scalable solutions aligned with your strategic objectives.',
-  },
-  {
-    number: '03',
-    title: 'Development & Implementation',
-    description:
-      'Agile development with continuous integration and rigorous quality assurance.',
-  },
-  {
-    number: '04',
-    title: 'Deployment & Optimization',
-    description:
-      'Seamless deployment with monitoring and ongoing optimization for peak performance.',
-  },
+const steps = [
+  { title: 'Discover', text: 'We talk about your business, your customers, and what the site should do.' },
+  { title: 'Design', text: 'We design the look. You review and give feedback before anything is built.' },
+  { title: 'Build', text: 'The design becomes a fast site that works on every device.' },
+  { title: 'Launch', text: 'Your site goes live on your domain. Version one, ready to use.' },
+  { title: 'Improve', text: 'Add features, update content, fix what needs fixing. Then back to step 1.' },
 ]
 
 export function Process() {
   return (
-    <section className="py-20 px-4">
-      <div className="max-w-6xl mx-auto">
-        {/* Header */}
-        <motion.div
-          className="text-center mb-16"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-100px' }}
-          transition={{ duration: 0.8 }}
-        >
-          <h2 className="heading-lg mb-4 font-display">Our Process</h2>
-          <p className="text-foreground/70 max-w-2xl mx-auto">
-            A proven methodology for delivering exceptional results, every time.
-          </p>
-        </motion.div>
-
-        {/* Timeline */}
-        <div className="relative">
-          {/* Timeline line */}
-          <div className="absolute left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-accent via-accent/50 to-accent/20 transform -translate-x-1/2 hidden lg:block" />
-
-          {/* Steps */}
-          <motion.div
-            className="space-y-12 lg:space-y-24"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true, margin: '-100px' }}
-            transition={{ duration: 0.8 }}
-          >
-            {processSteps.map((step, index) => (
-              <motion.div
-                key={step.number}
-                className={`flex flex-col ${
-                  index % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse'
-                } gap-8 items-center`}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: '-50px' }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-              >
-                {/* Content */}
-                <div className="flex-1 lg:text-right" style={{ direction: index % 2 === 0 ? 'initial' : 'initial' }}>
-                  <div className="lg:mr-12">
-                    <h3 className="text-xl font-bold mb-2 font-display">
-                      {step.title}
-                    </h3>
-                    <p className="text-foreground/70">{step.description}</p>
-                  </div>
-                </div>
-
-                {/* Timeline dot */}
-                <div className="flex flex-col items-center">
-                  <motion.div
-                    className="w-12 h-12 rounded-full bg-gradient-to-br from-accent to-accent/70 flex items-center justify-center text-lg font-bold text-accent-foreground shadow-lg glow-accent"
-                    whileHover={{ scale: 1.2 }}
-                    transition={{ type: 'spring', stiffness: 400, damping: 10 }}
-                  >
-                    {step.number}
-                  </motion.div>
-                </div>
-
-                {/* Content placeholder for even distribution */}
-                <div className="flex-1 hidden lg:block" />
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
+    <section id="process" className="section scroll-mt-20">
+      <div className="container-site">
+        <SectionHead
+          eyebrow="Process"
+          title="Five steps, then repeat."
+          lead="Your website isn’t finished on launch day. Once it’s live, we look at what works and keep improving it."
+        />
+        <ol className="grid rounded-md border border-border bg-surface lg:grid-cols-5">
+          {steps.map((s, i) => (
+            <li
+              key={s.title}
+              className="grid min-w-0 content-start gap-2.5 border-b border-border px-6 pt-7 pb-8 last:border-b-0 last:bg-accent-soft lg:border-r lg:border-b-0 lg:last:border-r-0"
+            >
+              <span className="font-mono text-[13px] font-medium text-accent">{String(i + 1).padStart(2, '0')}</span>
+              <h3 className="text-[21px] font-bold">{s.title}</h3>
+              <p className="text-[15px] text-muted-foreground">{s.text}</p>
+            </li>
+          ))}
+        </ol>
+        <p className="mt-4 flex items-center gap-2.5 font-mono text-[13px] text-muted-foreground">
+          <svg width="34" height="16" viewBox="0 0 34 16" fill="none" aria-hidden>
+            <path d="M32 4H6m0 0 4-3M6 4l4 3M32 4v8H2" stroke="currentColor" strokeWidth="1.5" />
+          </svg>
+          v1.0 → v1.1 → v1.2 → …
+        </p>
       </div>
     </section>
   )

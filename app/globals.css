@@ -2,61 +2,172 @@
 @import 'tw-animate-css';
 @import 'shadcn/tailwind.css';
 
-@custom-variant dark (&:is(.dark *));
+/* itrate: clean tech. Light-first, follows the OS dark setting. */
+:root {
+  --bg: #f7f8fb;
+  --surface: #ffffff;
+  --ink: #0e1220;
+  --muted: #5a6278;
+  --line: #e2e5ee;
+  --accent: #2346ff;
+  --accent-soft: #e7ecff;
+  --accent-ink: #ffffff;
+  --ok: #12925b;
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0b0e17;
+    --surface: #121625;
+    --ink: #eef0f7;
+    --muted: #9aa2ba;
+    --line: #232a3e;
+    --accent: #5c78ff;
+    --accent-soft: #1a2250;
+    --accent-ink: #ffffff;
+    --ok: #3cc98a;
+    color-scheme: dark;
+  }
+}
 
 @theme inline {
-  --font-sans: 'Inter', sans-serif;
-  --font-display: 'Plus Jakarta Sans', sans-serif;
-  --color-accent: oklch(0.488 0.243 264.376);
-  --color-accent-dark: oklch(0.371 0.243 264.376);
-  --color-background: oklch(0.049 0.001 280);
-  --color-foreground: oklch(0.98 0.001 280);
-  --color-muted: oklch(0.15 0.001 280);
-  --color-border: oklch(1 0 0 / 12%);
+  --font-sans: var(--font-body), 'Segoe UI', system-ui, sans-serif;
+  --font-display: var(--font-heading), 'Segoe UI', system-ui, sans-serif;
+  --font-mono: var(--font-code), ui-monospace, Consolas, monospace;
+
+  --color-background: var(--bg);
+  --color-surface: var(--surface);
+  --color-foreground: var(--ink);
+  --color-muted-foreground: var(--muted);
+  --color-border: var(--line);
+  --color-accent: var(--accent);
+  --color-accent-soft: var(--accent-soft);
+  --color-accent-foreground: var(--accent-ink);
+  --color-ok: var(--ok);
+  --color-ring: var(--accent);
+  --color-primary: var(--accent);
 }
 
 @layer base {
   * {
     @apply border-border;
   }
-  body {
-    @apply bg-background text-foreground font-sans;
-  }
   html {
     @apply bg-background scroll-smooth;
+  }
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    line-height: 1.6;
+  }
+  h1,
+  h2,
+  h3 {
+    @apply font-display;
+    letter-spacing: -0.02em;
+    line-height: 1.08;
+    text-wrap: balance;
+  }
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation: none !important;
+      transition: none !important;
+    }
   }
 }
 
 @layer components {
-  .gradient-accent {
-    @apply bg-gradient-to-br from-[#4F6BFF] to-[#2F4DFF];
+  .container-site {
+    @apply mx-auto w-full max-w-[1160px] px-4 sm:px-6;
+  }
+  .section {
+    padding-block: clamp(64px, 9vw, 112px);
+  }
+  .eyebrow {
+    @apply font-mono text-xs uppercase tracking-[0.08em] text-accent;
+  }
+  .lead {
+    @apply text-muted-foreground;
+    font-size: clamp(17px, 1.6vw, 19px);
+    max-width: 58ch;
   }
 
-  .glow-accent {
-    @apply shadow-[0_0_20px_rgba(79,107,255,0.3)];
+  /* Portfolio thumbnail: Poly Board Games Cafe (fixed brand colors, same in both themes) */
+  .t-poly {
+    background: #fff4e0;
+    padding: 7%;
+    display: grid;
+    grid-template-rows: auto auto 1fr;
+    gap: 6%;
   }
+  .t-poly .brand {
+    font: 800 clamp(14px, 2.2vw, 22px) / 1 var(--font-display);
+    color: #1f2a44;
+  }
+  .t-poly .brand span { color: #e5502e; }
+  .t-poly .pill {
+    background: #1f2a44;
+    color: #fff4e0;
+    font-size: 10px;
+    font-weight: 600;
+    padding: 5px 10px;
+    border-radius: 999px;
+  }
+  .t-poly .filters { display: flex; gap: 6px; }
+  .t-poly .filters i { height: 16px; width: 52px; border-radius: 999px; background: #f6d9a8; }
+  .t-poly .filters i:first-child { background: #e5502e; }
+  .t-poly .games { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; }
+  .t-poly .games i { border-radius: 5px; }
+  .t-poly .games i:nth-child(5n + 1) { background: #e5502e; }
+  .t-poly .games i:nth-child(5n + 2) { background: #2e8b6e; }
+  .t-poly .games i:nth-child(5n + 3) { background: #f2b134; }
+  .t-poly .games i:nth-child(5n + 4) { background: #3a5ba9; }
+  .t-poly .games i:nth-child(5n) { background: #1f2a44; }
 
-  .glow-accent-strong {
-    @apply shadow-[0_0_40px_rgba(79,107,255,0.4),0_0_80px_rgba(79,107,255,0.2)];
+  /* Portfolio thumbnail: Cherished Voices */
+  .t-cher {
+    background: linear-gradient(160deg, #2a1e1a, #120d0c 70%);
+    padding: 7%;
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 6%;
+    align-items: center;
   }
-
-  .heading-xl {
-    @apply text-4xl md:text-5xl lg:text-6xl font-bold leading-tight tracking-tight;
+  .t-cher .copy { display: grid; gap: 10px; }
+  .t-cher .script {
+    font: italic 500 clamp(16px, 2.6vw, 26px) / 1.1 Georgia, 'Times New Roman', serif;
+    color: #f3e3c7;
   }
-
-  .heading-lg {
-    @apply text-3xl md:text-4xl font-bold leading-tight tracking-tight;
+  .t-cher .line { height: 6px; border-radius: 3px; background: #4a3a30; width: 80%; }
+  .t-cher .line.s { width: 55%; }
+  .t-cher .gold { margin-top: 6px; width: 46%; height: 20px; border-radius: 999px; background: #c9a15b; }
+  .t-cher .cal {
+    background: #1c1513;
+    border: 1px solid #3a2c25;
+    border-radius: 6px;
+    padding: 8%;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 4px;
   }
-
-  .heading-md {
-    @apply text-2xl md:text-3xl font-bold leading-tight;
-  }
-
-  .text-balance {
-    text-wrap: balance;
-  }
+  .t-cher .cal i { aspect-ratio: 1; border-radius: 2px; background: #2c221e; }
+  .t-cher .cal i.e { background: #c9a15b; }
+  .t-cher .cal i.h { background: transparent; outline: 1px solid #c9a15b; outline-offset: -1px; }
 }
 
-:root {
-  color-scheme: dark;
+@keyframes rise {
+  from { transform: translateY(10px); opacity: 0; }
+  to { transform: none; opacity: 1; }
+}
+.animate-rise {
+  animation: rise 0.8s 0.4s both;
 }

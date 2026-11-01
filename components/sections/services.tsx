@@ -1,132 +1,71 @@
-'use client'
+import { SectionHead } from './section-head'
 
-import { motion } from 'framer-motion'
-import {
-  Brain,
-  Code2,
-  BarChart3,
-  Zap,
-  Shield,
-  Users,
-} from 'lucide-react'
+const card = 'grid min-w-0 content-start gap-3 rounded-md border border-border bg-surface p-7'
+const tag = 'font-mono text-xs text-muted-foreground'
 
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.1,
-      delayChildren: 0.2,
-    },
-  },
-}
-
-const cardVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.8, ease: 'easeOut' },
-  },
-  hover: {
-    y: -8,
-    transition: { duration: 0.3 },
-  },
-}
-
-const services = [
-  {
-    icon: Brain,
-    title: 'AI & Machine Learning',
-    description:
-      'Custom AI solutions powered by the latest models and frameworks to automate complex business processes.',
-  },
-  {
-    icon: Code2,
-    title: 'Software Development',
-    description:
-      'Scalable, production-ready applications built with modern technologies and best practices.',
-  },
-  {
-    icon: BarChart3,
-    title: 'Data Analytics',
-    description:
-      'Transform raw data into actionable insights with advanced analytics and visualization tools.',
-  },
-  {
-    icon: Zap,
-    title: 'Performance Optimization',
-    description:
-      'Maximize efficiency and reduce costs through intelligent system optimization and automation.',
-  },
-  {
-    icon: Shield,
-    title: 'Security & Compliance',
-    description:
-      'Enterprise-grade security solutions ensuring GDPR, HIPAA, and SOC 2 compliance.',
-  },
-  {
-    icon: Users,
-    title: 'Consulting & Strategy',
-    description:
-      'Strategic guidance from industry experts to align technology with business objectives.',
-  },
-]
+const extras = ['Local SEO', 'Google Business Profile', 'PDF company profile', 'Booking system', 'Simple web app']
 
 export function Services() {
   return (
-    <section id="services" className="scroll-mt-20 py-20 px-4">
-      <div className="max-w-6xl mx-auto">
-        {/* Header */}
-        <motion.div
-          className="text-center mb-16"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-100px' }}
-          transition={{ duration: 0.8 }}
-        >
-          <h2 className="heading-lg mb-4 font-display">Our Services</h2>
-          <p className="text-foreground/70 max-w-2xl mx-auto">
-            Comprehensive solutions tailored to accelerate your digital transformation journey.
-          </p>
-        </motion.div>
+    <section id="services" className="section scroll-mt-20">
+      <div className="container-site">
+        <SectionHead eyebrow="Services" title="Everything your business needs to look professional online." />
 
-        {/* Services Grid */}
-        <motion.div
-          className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: '-100px' }}
-        >
-          {services.map((service) => {
-            const Icon = service.icon
-            return (
-              <motion.div
-                key={service.title}
-                className="group relative rounded-xl border border-border bg-muted/50 p-6 hover:border-accent/50 hover:bg-muted/70 transition-all duration-300 cursor-pointer overflow-hidden"
-                variants={cardVariants}
-                whileHover="hover"
-              >
-                {/* Glow effect on hover */}
-                <div className="absolute inset-0 bg-gradient-to-br from-accent/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+        <div className="grid gap-4 lg:grid-cols-6">
+          <article className="grid min-w-0 content-between gap-8 rounded-md bg-accent p-9 text-accent-foreground lg:col-span-4 lg:row-span-2">
+            <div className="grid gap-3.5">
+              <span className="font-mono text-xs opacity-75">Core service</span>
+              <h3 className="text-[clamp(26px,3vw,36px)] font-bold">Company Profile Website</h3>
+              <p className="max-w-[46ch] opacity-85">
+                Your official website: who you are, what you offer, and how to reach you. Built from scratch around
+                your business, not an off-the-shelf template.
+              </p>
+            </div>
+            <ul className="grid gap-x-5 gap-y-2.5 text-[15px] sm:grid-cols-2">
+              {['Home & about us', 'Services / products pages', 'Gallery & portfolio', 'Contact, map, WhatsApp'].map(
+                (i) => (
+                  <li key={i}>
+                    <span className="opacity-70">→ </span>
+                    {i}
+                  </li>
+                ),
+              )}
+            </ul>
+          </article>
 
-                <div className="relative z-10">
-                  <div className="mb-4 inline-block p-3 bg-accent/20 rounded-lg group-hover:bg-accent/30 transition-colors">
-                    <Icon className="w-6 h-6 text-accent" />
-                  </div>
-                  <h3 className="heading-md mb-3 font-display text-lg">
-                    {service.title}
-                  </h3>
-                  <p className="text-foreground/70">{service.description}</p>
-                </div>
+          <article className={`${card} lg:col-span-2`}>
+            <span className={tag}>Campaigns</span>
+            <h3 className="text-[21px] font-bold">Landing Page</h3>
+            <p className="text-[15px] text-muted-foreground">
+              One focused page for a promo, product launch, or event, built to get visitors to contact you.
+            </p>
+          </article>
 
-                {/* Border glow on hover */}
-                <div className="absolute inset-0 rounded-xl border border-accent/0 group-hover:border-accent/30 transition-all duration-300 pointer-events-none" />
-              </motion.div>
-            )
-          })}
-        </motion.div>
+          <article className={`${card} lg:col-span-2`}>
+            <span className={tag}>Identity</span>
+            <h3 className="text-[21px] font-bold">Brand Basics</h3>
+            <p className="text-[15px] text-muted-foreground">
+              Logo cleanup, colors and fonts, plus a short guide so your business looks consistent everywhere.
+            </p>
+          </article>
+
+          <article className="flex min-w-0 flex-wrap items-center justify-between gap-x-8 gap-y-4 rounded-md border border-border bg-surface p-7 lg:col-span-6">
+            <div className="grid max-w-[520px] gap-2">
+              <span className={tag}>Care & add-ons</span>
+              <h3 className="text-[21px] font-bold">Domain, hosting, and regular updates</h3>
+              <p className="text-[15px] text-muted-foreground">
+                We handle the technical side. You just send changes over WhatsApp.
+              </p>
+            </div>
+            <div className="flex flex-wrap gap-2">
+              {extras.map((e) => (
+                <span key={e} className="rounded-full bg-accent-soft px-3 py-1.5 text-[13px] font-medium text-accent">
+                  {e}
+                </span>
+              ))}
+            </div>
+          </article>
+        </div>
       </div>
     </section>
   )

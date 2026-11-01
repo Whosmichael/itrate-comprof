@@ -1,101 +1,79 @@
-'use client'
-
-import { motion } from 'framer-motion'
-import { Button } from '@/components/ui/button'
 import { ArrowRight } from 'lucide-react'
+import { buttonVariants } from '@/components/ui/button'
 
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.1,
-      delayChildren: 0.2,
-    },
-  },
-}
-
-const itemVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.8, ease: 'easeOut' },
-  },
-}
+const changelog = [
+  { v: 'v1.0', text: 'Home, menu, and contact', when: 'week 2' },
+  { v: 'v1.1', text: 'Catalog of 102 board games', when: 'month 1' },
+  { v: 'v1.2', text: 'Table booking + WhatsApp', when: 'live' },
+]
 
 export function Hero() {
   return (
-    <section className="relative min-h-screen flex items-center justify-center pt-20 pb-10 px-4 overflow-hidden">
-      {/* Background gradient orbs */}
-      <div className="absolute top-0 -right-1/3 w-96 h-96 bg-accent/20 rounded-full blur-3xl opacity-30 pointer-events-none" />
-      <div className="absolute bottom-0 -left-1/3 w-96 h-96 bg-accent/10 rounded-full blur-3xl opacity-20 pointer-events-none" />
-
-      <motion.div
-        className="relative z-10 max-w-4xl mx-auto text-center"
-        variants={containerVariants}
-        initial="hidden"
-        animate="visible"
-      >
-        {/* Badge */}
-        <motion.div variants={itemVariants} className="mb-6">
-          <div className="inline-block px-4 py-2 rounded-full border border-accent/40 bg-accent/10">
-            <p className="text-sm font-medium text-accent">Next-Generation AI Solutions</p>
+    <section className="pt-[clamp(48px,7vw,96px)] pb-[clamp(56px,8vw,104px)]">
+      <div className="container-site grid items-center gap-[clamp(32px,5vw,72px)] lg:grid-cols-[1.05fr_0.95fr]">
+        <div className="grid min-w-0 gap-6">
+          <span className="eyebrow">Websites for small businesses</span>
+          <h1 className="text-[clamp(40px,6.2vw,76px)] font-extrabold">
+            Your business website. Launched fast, then <span className="text-accent">always getting better.</span>
+          </h1>
+          <p className="lead">
+            itrate builds company profile websites for Indonesian small businesses. We design, build, and launch the
+            first version, then keep improving it with you as your business grows.
+          </p>
+          <div className="flex flex-wrap gap-3">
+            <a href="#contact" className={buttonVariants({ size: 'lg' })}>
+              Start a Project <ArrowRight />
+            </a>
+            <a href="#work" className={buttonVariants({ size: 'lg', variant: 'outline' })}>
+              See Our Work
+            </a>
           </div>
-        </motion.div>
+          <p className="flex items-center gap-2 text-sm text-muted-foreground">
+            <span aria-hidden className="size-2 rounded-full bg-ok shadow-[0_0_0_4px_color-mix(in_srgb,var(--ok)_20%,transparent)]" />
+            First consultation is free, no commitment.
+          </p>
+        </div>
 
-        {/* Heading */}
-        <motion.h1
-          variants={itemVariants}
-          className="heading-xl text-balance mb-6 font-display"
+        {/* Browser mockup: a site that grows version by version */}
+        <div
+          className="min-w-0 overflow-hidden rounded-[10px] border border-border bg-surface shadow-[0_30px_60px_-30px_color-mix(in_srgb,var(--accent)_35%,transparent)]"
+          aria-label="Illustration of a website growing version by version"
         >
-          Transform Your Business with
-          <span className="gradient-accent text-transparent bg-clip-text block mt-2">
-            Intelligent Automation
-          </span>
-        </motion.h1>
-
-        {/* Subheading */}
-        <motion.p
-          variants={itemVariants}
-          className="text-lg md:text-xl text-foreground/70 text-balance mb-8 max-w-2xl mx-auto leading-relaxed"
-        >
-          Q4 Collective combines cutting-edge AI, software engineering, and strategic consulting to unlock unprecedented growth for enterprises worldwide.
-        </motion.p>
-
-        {/* CTA Buttons */}
-        <motion.div
-          variants={itemVariants}
-          className="flex flex-col sm:flex-row gap-4 justify-center items-center"
-        >
-          <Button size="lg" className="w-full sm:w-auto">
-            Get Started
-            <ArrowRight className="w-5 h-5" />
-          </Button>
-          <Button size="lg" variant="outline" className="w-full sm:w-auto">
-            Watch Demo
-          </Button>
-        </motion.div>
-
-        {/* Stats */}
-        <motion.div
-          variants={itemVariants}
-          className="mt-16 grid grid-cols-3 gap-8 max-w-2xl mx-auto"
-        >
-          {/* {[
-            { value: '500+', label: 'Enterprises' },
-            { value: '10B+', label: 'Transactions' },
-            { value: '99.9%', label: 'Uptime' },
-          ].map((stat) => (
-            <div key={stat.label} className="text-center">
-              <p className="text-2xl md:text-3xl font-bold text-accent mb-2">
-                {stat.value}
-              </p>
-              <p className="text-sm text-foreground/60">{stat.label}</p>
+          <div className="flex items-center gap-2.5 border-b border-border px-3.5 py-2.5">
+            {[0, 1, 2].map((i) => (
+              <span key={i} className="size-2.5 rounded-full bg-border" />
+            ))}
+            <span className="flex-1 truncate rounded bg-background px-2.5 py-1.5 font-mono text-xs text-muted-foreground">
+              polycafe.id/games
+            </span>
+          </div>
+          <div aria-hidden className="grid gap-3 p-5">
+            <div className="grid h-[84px] content-center gap-2 rounded bg-accent-soft px-4">
+              <div className="h-2.5 w-[58%] rounded-sm bg-border" />
+              <div className="h-2.5 w-[40%] rounded-sm bg-border" />
+              <div className="h-2.5 w-[34%] rounded-sm bg-accent" />
             </div>
-          ))} */}
-        </motion.div>
-      </motion.div>
+            <div className="grid grid-cols-3 gap-2.5">
+              <div className="h-16 rounded bg-background" />
+              <div className="h-16 rounded bg-background" />
+              <div className="animate-rise h-16 rounded bg-accent-soft outline-2 -outline-offset-2 outline-accent outline-dashed" />
+            </div>
+          </div>
+          <ul className="grid gap-2 border-t border-border px-5 pt-3.5 pb-4.5 font-mono text-[13px] leading-snug">
+            {changelog.map((c) => (
+              <li key={c.v} className="grid grid-cols-[52px_1fr_auto] items-baseline gap-3">
+                <b className="font-medium text-accent">{c.v}</b>
+                <span>{c.text}</span>
+                {c.when === 'live' ? (
+                  <span className="text-[11px] text-ok">● live</span>
+                ) : (
+                  <span className="text-muted-foreground">{c.when}</span>
+                )}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
     </section>
   )
 }
