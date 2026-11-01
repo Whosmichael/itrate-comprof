@@ -182,6 +182,23 @@ export function Portfolio() {
             )
           })}
         </div>
+
+        {/* We have built more than we show here */}
+        <Reveal className="mt-[clamp(64px,9vw,104px)]">
+          <div className="flex flex-wrap items-center justify-between gap-x-8 gap-y-4 border-t border-border pt-8">
+            <p className="max-w-[60ch] text-[17px] text-muted-foreground">
+              <span className="font-semibold text-foreground">And many more.</span> Apps, automations, and data systems
+              we’ve built that aren’t shown here.
+            </p>
+            <a
+              href="#contact"
+              className="group/more inline-flex items-center gap-1.5 text-[15px] font-semibold text-accent"
+            >
+              Ask us for examples
+              <ArrowUpRight className="size-4 transition-transform group-hover/more:translate-x-0.5 group-hover/more:-translate-y-0.5" />
+            </a>
+          </div>
+        </Reveal>
       </div>
     </section>
   )

@@ -244,7 +244,7 @@ export function MaintainScene() {
       </motion.div>
 
       <div className="overflow-hidden rounded-lg border border-border bg-surface">
-        <div className="border-b border-border px-4 py-2.5 text-[12px] font-semibold">Today on your site</div>
+        <div className="border-b border-border px-4 py-2.5 text-[12px] font-semibold">Today on your system</div>
         {log.map(([t, l], i) => (
           <motion.div
             key={t}
