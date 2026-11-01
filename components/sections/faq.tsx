@@ -16,7 +16,7 @@ const faqs = [
   },
   {
     q: 'Who owns the website when it’s done?',
-    a: 'You do. The domain and content are in your business’s name. If you want us to look after it, there’s the monthly Care plan.',
+    a: 'You do. The domain and content are in your business’s name. If you want us to look after it afterwards, we offer ongoing care: hosting, backups, and regular updates.',
   },
   {
     q: 'Can it connect to WhatsApp and Instagram?',

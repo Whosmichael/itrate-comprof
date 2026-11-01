@@ -5,7 +5,6 @@ import { Strip } from '@/components/sections/strip'
 import { Services } from '@/components/sections/services'
 import { Portfolio } from '@/components/sections/portfolio'
 import { Process } from '@/components/sections/process'
-import { Pricing } from '@/components/sections/pricing'
 import { Why } from '@/components/sections/why'
 import { Faq } from '@/components/sections/faq'
 import { Contact } from '@/components/sections/contact'
@@ -20,7 +19,6 @@ export default function Page() {
         <Services />
         <Portfolio />
         <Process />
-        <Pricing />
         <Why />
         <Faq />
         <Contact />
