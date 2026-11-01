@@ -110,12 +110,12 @@ function Shot({ p }: { p: Project }) {
             sizes="(min-width: 1024px) 600px, 100vw"
             className={cn(
               'absolute inset-x-0 top-0 w-full ease-in-out',
-              tall && 'transition-transform duration-[6000ms] group-hover:[transform:translateY(var(--travel))]',
+              tall && 'peek-scroll transition-transform duration-[6000ms] group-hover:[transform:translateY(var(--travel))]',
             )}
             style={{ '--travel': `-${travel}%` } as React.CSSProperties}
           />
           {tall && (
-            <span className="pointer-events-none absolute right-3 bottom-3 rounded-full bg-surface/90 px-2.5 py-1 font-mono text-[10px] text-muted-foreground shadow-sm backdrop-blur transition-opacity duration-300 group-hover:opacity-0">
+            <span className="pointer-events-none absolute right-3 bottom-3 rounded-full bg-surface/90 px-2.5 py-1 font-mono text-[10px] text-muted-foreground shadow-sm backdrop-blur transition-opacity duration-300 group-hover:opacity-0 [@media(hover:none)]:hidden">
               Hover to scroll
             </span>
           )}

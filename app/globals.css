@@ -121,6 +121,19 @@
   animation-play-state: paused;
 }
 
+/* Touch screens can't hover, so project screenshots scroll by themselves there */
+@keyframes peek-scroll {
+  0%, 12% { transform: none; }
+  50%, 62% { transform: translateY(var(--travel)); }
+  100% { transform: none; }
+}
+@media (hover: none) {
+  .peek-scroll { animation: peek-scroll 14s ease-in-out infinite; }
+}
+@media (hover: none) and (prefers-reduced-motion: reduce) {
+  .peek-scroll { animation: none; }
+}
+
 /* Text painted with the young → mature gradient (used in the scattered strip) */
 .maturing-text {
   background: linear-gradient(90deg, var(--m0), var(--m1) 55%, var(--m2));

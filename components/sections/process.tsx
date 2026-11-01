@@ -66,10 +66,10 @@ const pointAt = (deg: number, r = R) => {
   return { x: C + r * Math.cos(rad), y: C + r * Math.sin(rad) }
 }
 
-function StepDetail({ step, i }: { step: Step; i: number }) {
+function StepDetail({ step, i, compact = false }: { step: Step; i: number; compact?: boolean }) {
   return (
-    <div className="grid gap-4">
-      <div className="flex items-center gap-3">
+    <div className={cn('grid', compact ? 'gap-3' : 'gap-4')}>
+      <div className={cn('flex items-center gap-3', compact && 'hidden')}>
         <span className="grid size-10 place-items-center rounded-lg bg-accent-soft text-accent">
           <step.icon className="size-5" />
         </span>
@@ -78,8 +78,8 @@ function StepDetail({ step, i }: { step: Step; i: number }) {
           {String(i + 1).padStart(2, '0')} / {String(N).padStart(2, '0')}
         </span>
       </div>
-      <p className="max-w-[48ch] text-[15px] text-muted-foreground">{step.doText}</p>
-      <dl className="grid max-w-[48ch] gap-3 text-[14px]">
+      <p className={cn('max-w-[48ch] text-muted-foreground', compact ? 'text-[14px]' : 'text-[15px]')}>{step.doText}</p>
+      <dl className={cn('grid max-w-[48ch] text-[14px]', compact ? 'gap-2' : 'gap-3')}>
         <div className="grid gap-1 rounded-lg border border-accent/25 bg-accent-soft px-3.5 py-2.5">
           <dt className="font-mono text-[10.5px] tracking-[0.08em] text-accent uppercase">You get</dt>
           <dd className="font-semibold">{step.get}</dd>
@@ -89,7 +89,7 @@ function StepDetail({ step, i }: { step: Step; i: number }) {
           <dd>{step.you}</dd>
         </div>
       </dl>
-      {i === N - 1 && (
+      {i === N - 1 && !compact && (
         <p className="flex items-center gap-2 px-3.5 font-mono text-[12px] text-muted-foreground">
           <RotateCw className="size-3.5 text-accent" /> Then back to Discover, for v1.1
         </p>
@@ -98,7 +98,7 @@ function StepDetail({ step, i }: { step: Step; i: number }) {
   )
 }
 
-function Ring({ progress, active }: { progress: MotionValue<number>; active: number }) {
+function Ring({ progress, active, compact = false }: { progress: MotionValue<number>; active: number; compact?: boolean }) {
   const angle = useTransform(progress, (p) => -90 + p * 360)
   const dotX = useTransform(angle, (a) => pointAt(a).x)
   const dotY = useTransform(angle, (a) => pointAt(a).y)
@@ -175,19 +175,20 @@ function Ring({ progress, active }: { progress: MotionValue<number>; active: num
             animate={i === active ? { scale: [1, 1.18, 1] } : { scale: 1 }}
             transition={{ duration: 0.5 }}
           >
-            <s.icon className="size-[18px]" strokeWidth={2.2} />
+            <s.icon className={compact ? 'size-[13px]' : 'size-[18px]'} strokeWidth={2.2} />
           </motion.span>
         )
       })}
 
       {/* Step labels around the ring */}
       {steps.map((s, i) => {
-        const p = pointAt(angleOf(i), R + 52)
+        const p = pointAt(angleOf(i), compact ? R + 62 : R + 52)
         return (
           <span
             key={s.title}
             className={cn(
-              'absolute flex -translate-x-1/2 -translate-y-1/2 items-baseline gap-1.5 font-display text-[15px] whitespace-nowrap transition-colors duration-300',
+              'absolute flex -translate-x-1/2 -translate-y-1/2 items-baseline font-display whitespace-nowrap transition-colors duration-300',
+              compact ? 'gap-1 text-[12.5px]' : 'gap-1.5 text-[15px]',
               i === active ? 'font-bold text-foreground' : i < active ? 'text-foreground/70' : 'text-muted-foreground',
             )}
             style={{ left: `${(p.x / 400) * 100}%`, top: `${(p.y / 400) * 100}%` }}
@@ -213,25 +214,35 @@ function Ring({ progress, active }: { progress: MotionValue<number>; active: num
               const Icon = steps[active].icon
               return (
                 <motion.span
-                  className="mb-1 grid size-14 place-items-center rounded-2xl bg-accent-soft text-accent"
+                  className={cn(
+                    'mb-1 grid place-items-center bg-accent-soft text-accent',
+                    compact ? 'size-10 rounded-xl' : 'size-14 rounded-2xl',
+                  )}
                   initial={{ rotate: -20, scale: 0.7 }}
                   animate={{ rotate: 0, scale: 1 }}
                   transition={{ type: 'spring', stiffness: 260, damping: 16 }}
                 >
-                  <Icon className="size-7" />
+                  <Icon className={compact ? 'size-5' : 'size-7'} />
                 </motion.span>
               )
             })()}
             <span className="font-mono text-[11px] text-accent">
               {String(active + 1).padStart(2, '0')} / {String(N).padStart(2, '0')}
             </span>
-            <span className="font-display text-[clamp(28px,3vw,40px)] leading-none font-extrabold">{steps[active].title}</span>
+            <span
+              className={cn(
+                'font-display leading-none font-extrabold',
+                compact ? 'text-[22px]' : 'text-[clamp(28px,3vw,40px)]',
+              )}
+            >
+              {steps[active].title}
+            </span>
             {active === N - 1 ? (
               <span className="mt-1 flex items-center gap-1.5 font-mono text-[12px] text-muted-foreground">
                 <motion.span animate={{ rotate: 360 }} transition={{ duration: 2.4, repeat: Infinity, ease: 'linear' }}>
                   <RotateCw className="size-3.5 text-accent" />
                 </motion.span>
-                v1.1 → back to Discover
+                {compact ? 'back to 01' : 'v1.1 → back to Discover'}
               </span>
             ) : (
               <span className="mt-1 font-mono text-[12px] text-muted-foreground">
@@ -321,26 +332,63 @@ export function Process() {
         </div>
       </div>
 
-      {/* Mobile and tablet: the same steps as a list */}
-      <div className="section lg:hidden">
-        <div className="container-site">
+      {/* Mobile and tablet: the same loop, pinned under the heading and driven by scroll */}
+      <MobileLoop />
+    </section>
+  )
+}
+
+function MobileLoop() {
+  const ref = useRef<HTMLDivElement>(null)
+  const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end end'] })
+  const progress = useSpring(scrollYProgress, { stiffness: 90, damping: 22, restDelta: 0.0005 })
+  const [active, setActive] = useState(0)
+
+  useMotionValueEvent(scrollYProgress, 'change', (p) => {
+    setActive(Math.min(N - 1, Math.max(0, Math.floor(p * N * 0.999))))
+  })
+
+  return (
+    <div className="pt-[clamp(72px,10vw,128px)] lg:hidden">
+      <div className="container-site">
+        <Reveal>
           <SectionHead
             eyebrow="Process"
             title="Build. Ship. Iterate. On repeat."
             lead="Nothing is finished on launch day. Every project runs through the same loop, then goes round again."
           />
-          <ol className="relative grid gap-10 border-l border-border pl-8">
-            {steps.map((s, i) => (
-              <Reveal as="li" key={s.title} className="relative">
-                <span className="absolute top-1 -left-[49px] grid size-[34px] place-items-center rounded-full border border-accent/30 bg-surface text-accent">
-                  <s.icon className="size-4" />
-                </span>
-                <StepDetail step={s} i={i} />
-              </Reveal>
-            ))}
-          </ol>
+        </Reveal>
+      </div>
+      <div ref={ref} className="relative h-[420vh]">
+        <div className="sticky top-[68px] flex h-[calc(100svh-68px)] flex-col items-center justify-center gap-5 overflow-hidden">
+          <div className="w-[min(300px,70vw,44svh)]">
+            <Ring progress={progress} active={active} compact />
+          </div>
+          <div className="container-site w-full max-w-[460px]">
+            <div className="min-h-[214px]">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={active}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -8 }}
+                  transition={{ duration: 0.25 }}
+                >
+                  <StepDetail step={steps[active]} i={active} compact />
+                </motion.div>
+              </AnimatePresence>
+            </div>
+            <div className="mt-3 flex justify-center gap-1.5" aria-hidden>
+              {steps.map((s, i) => (
+                <span
+                  key={s.title}
+                  className={cn('h-1.5 rounded-full transition-all duration-300', i === active ? 'w-6 bg-accent' : 'w-1.5 bg-border')}
+                />
+              ))}
+            </div>
+          </div>
         </div>
       </div>
-    </section>
+    </div>
   )
 }

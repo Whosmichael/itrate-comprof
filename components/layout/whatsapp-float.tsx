@@ -43,7 +43,7 @@ export function WhatsAppFloat() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 8, scale: 0.95 }}
             transition={{ type: 'spring', stiffness: 320, damping: 24 }}
-            className="relative max-w-[260px] rounded-xl rounded-br-sm border border-border bg-surface p-4 pr-9 text-sm shadow-[0_20px_50px_-20px_rgba(var(--shadow),0.4)]"
+            className="relative max-w-[208px] rounded-xl rounded-br-sm border border-border bg-surface p-3 pr-8 text-[13px] shadow-[0_20px_50px_-20px_rgba(var(--shadow),0.4)] sm:max-w-[260px] sm:p-4 sm:pr-9 sm:text-sm"
           >
             <button
               type="button"
