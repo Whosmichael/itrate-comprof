@@ -120,7 +120,7 @@ export function Services() {
       <div className="container-site">
         <SectionHead
           eyebrow="What we do"
-          title="One team for every part of your tech."
+          title="Enabling your business with tech."
           lead="Tell us the problem. We pick the right tool, build it, ship it, and stay to keep it working."
         />
 
