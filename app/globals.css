@@ -2,61 +2,129 @@
 @import 'tw-animate-css';
 @import 'shadcn/tailwind.css';
 
-@custom-variant dark (&:is(.dark *));
+/* itrate: calm clean tech. Always light by default; dark only when chosen with the navbar switch. */
+:root {
+  --bg: #f7f8fa;
+  --surface: #ffffff;
+  --ink: #161a26;
+  --muted: #5f6779;
+  --line: #e4e7ee;
+  --accent: #3a5bd9;
+  --accent-soft: #eef2fd;
+  --accent-ink: #ffffff;
+  --ok: #1f9d6b;
+  --shadow: 22, 26, 38;
+  /* "Maturing" word: young → mature */
+  --m0: #a9b9f3;
+  --m1: #3a5bd9;
+  --m2: #1a2266;
+  color-scheme: light;
+}
+
+:root[data-theme='dark'] {
+  --bg: #0c0f17;
+  --surface: #131826;
+  --ink: #e9ecf4;
+  --muted: #98a0b5;
+  --line: #242b3d;
+  --accent: #6b85ff;
+  --accent-soft: #1a2244;
+  --accent-ink: #ffffff;
+  --ok: #3cc58c;
+  --shadow: 0, 0, 0;
+  --m0: #34427a;
+  --m1: #6b85ff;
+  --m2: #cdd7ff;
+  color-scheme: dark;
+}
 
 @theme inline {
-  --font-sans: 'Inter', sans-serif;
-  --font-display: 'Plus Jakarta Sans', sans-serif;
-  --color-accent: oklch(0.488 0.243 264.376);
-  --color-accent-dark: oklch(0.371 0.243 264.376);
-  --color-background: oklch(0.049 0.001 280);
-  --color-foreground: oklch(0.98 0.001 280);
-  --color-muted: oklch(0.15 0.001 280);
-  --color-border: oklch(1 0 0 / 12%);
+  --font-sans: var(--font-body), 'Segoe UI', system-ui, sans-serif;
+  --font-display: var(--font-heading), 'Segoe UI', system-ui, sans-serif;
+  --font-mono: var(--font-code), ui-monospace, Consolas, monospace;
+
+  --color-background: var(--bg);
+  --color-surface: var(--surface);
+  --color-foreground: var(--ink);
+  --color-muted-foreground: var(--muted);
+  --color-border: var(--line);
+  --color-accent: var(--accent);
+  --color-accent-soft: var(--accent-soft);
+  --color-accent-foreground: var(--accent-ink);
+  --color-ok: var(--ok);
+  --color-ring: var(--accent);
+  --color-primary: var(--accent);
 }
 
 @layer base {
   * {
     @apply border-border;
   }
-  body {
-    @apply bg-background text-foreground font-sans;
-  }
   html {
     @apply bg-background scroll-smooth;
+  }
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    line-height: 1.6;
+  }
+  h1,
+  h2,
+  h3 {
+    @apply font-display;
+    letter-spacing: -0.02em;
+    line-height: 1.08;
+    text-wrap: balance;
+  }
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation: none !important;
+      transition: none !important;
+    }
   }
 }
 
 @layer components {
-  .gradient-accent {
-    @apply bg-gradient-to-br from-[#4F6BFF] to-[#2F4DFF];
+  .container-site {
+    @apply mx-auto w-full max-w-[1160px] px-4 sm:px-6;
   }
-
-  .glow-accent {
-    @apply shadow-[0_0_20px_rgba(79,107,255,0.3)];
+  .section {
+    padding-block: clamp(72px, 10vw, 128px);
   }
-
-  .glow-accent-strong {
-    @apply shadow-[0_0_40px_rgba(79,107,255,0.4),0_0_80px_rgba(79,107,255,0.2)];
+  .eyebrow {
+    @apply font-mono text-xs uppercase tracking-[0.08em] text-accent;
   }
-
-  .heading-xl {
-    @apply text-4xl md:text-5xl lg:text-6xl font-bold leading-tight tracking-tight;
-  }
-
-  .heading-lg {
-    @apply text-3xl md:text-4xl font-bold leading-tight tracking-tight;
-  }
-
-  .heading-md {
-    @apply text-2xl md:text-3xl font-bold leading-tight;
-  }
-
-  .text-balance {
-    text-wrap: balance;
+  .lead {
+    @apply text-muted-foreground;
+    font-size: clamp(17px, 1.6vw, 19px);
+    max-width: 58ch;
   }
 }
 
-:root {
-  color-scheme: dark;
+/* Slow, endless marquee for the value strip */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.animate-marquee {
+  animation: marquee 40s linear infinite;
+}
+.group:hover .animate-marquee {
+  animation-play-state: paused;
+}
+
+/* Text painted with the young → mature gradient (used in the scattered strip) */
+.maturing-text {
+  background: linear-gradient(90deg, var(--m0), var(--m1) 55%, var(--m2));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }

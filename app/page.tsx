@@ -1,28 +1,29 @@
-'use client'
-
-import React from 'react'
 import { Navbar } from '@/components/layout/navbar'
 import { Footer } from '@/components/layout/footer'
 import { Hero } from '@/components/sections/hero'
-import { About } from '@/components/sections/about'
+import { Strip } from '@/components/sections/strip'
 import { Services } from '@/components/sections/services'
-import { Products } from '@/components/sections/products'
+import { Portfolio } from '@/components/sections/portfolio'
 import { Process } from '@/components/sections/process'
-import { Pricing } from '@/components/sections/pricing'
+import { Faq } from '@/components/sections/faq'
 import { Contact } from '@/components/sections/contact'
+import { WhatsAppFloat } from '@/components/layout/whatsapp-float'
 
 export default function Page() {
   return (
-    <main className="relative">
+    <>
       <Navbar />
-      <Hero />
-      <About />
-      <Services />
-      <Products />
-      <Process />
-      <Pricing />
-      <Contact />
+      <main id="top">
+        <Hero />
+        <Strip />
+        <Services />
+        <Portfolio />
+        <Process />
+        <Faq />
+        <Contact />
+      </main>
       <Footer />
-    </main>
+      <WhatsAppFloat />
+    </>
   )
 }
