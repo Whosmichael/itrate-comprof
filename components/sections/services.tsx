@@ -12,7 +12,7 @@ export function Services() {
         <SectionHead eyebrow="Services" title="Everything your business needs to look professional online." />
 
         <div className="grid gap-4 lg:grid-cols-6">
-          <article className="grid min-w-0 content-between gap-8 rounded-md bg-accent p-9 text-accent-foreground lg:col-span-4 lg:row-span-2">
+          <article className="grid min-w-0 content-between gap-8 rounded-md bg-accent p-9 text-accent-foreground lg:col-span-4">
             <div className="grid gap-3.5">
               <span className="font-mono text-xs opacity-75">Core service</span>
               <h3 className="text-[clamp(26px,3vw,36px)] font-bold">Company Profile Website</h3>
@@ -33,19 +33,11 @@ export function Services() {
             </ul>
           </article>
 
-          <article className={`${card} lg:col-span-2`}>
+          <article className={`${card} content-center lg:col-span-2`}>
             <span className={tag}>Campaigns</span>
             <h3 className="text-[21px] font-bold">Landing Page</h3>
             <p className="text-[15px] text-muted-foreground">
               One focused page for a promo, product launch, or event, built to get visitors to contact you.
-            </p>
-          </article>
-
-          <article className={`${card} lg:col-span-2`}>
-            <span className={tag}>Identity</span>
-            <h3 className="text-[21px] font-bold">Brand Basics</h3>
-            <p className="text-[15px] text-muted-foreground">
-              Logo cleanup, colors and fonts, plus a short guide so your business looks consistent everywhere.
             </p>
           </article>
 

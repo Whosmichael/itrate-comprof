@@ -7,7 +7,6 @@ import { buttonVariants } from '@/components/ui/button'
 const needs = [
   'Company profile website',
   'Landing page',
-  'Brand basics',
   'Website care',
   'Not sure yet, want to talk',
 ]

@@ -7,8 +7,8 @@ const faqs = [
     a: 'It depends on the pages and features. A company profile site usually goes live 2–3 weeks after we have all your content.',
   },
   {
-    q: 'I don’t have a logo or photos yet. Is that okay?',
-    a: 'Yes. We can tidy up your logo through Brand Basics and use placeholder photos until your real ones are ready.',
+    q: 'I don’t have photos or much content yet. Is that okay?',
+    a: 'Yes. We can start with placeholder photos and help you shape the text, then swap in the real ones when they’re ready.',
   },
   {
     q: 'How many revisions do I get?',
