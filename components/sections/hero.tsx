@@ -5,6 +5,7 @@ import { AnimatePresence, motion, useMotionValue, useSpring, useTransform, type 
 import { ArrowRight } from 'lucide-react'
 import { buttonVariants } from '@/components/ui/button'
 import { useReducedMotionSafe } from '@/lib/use-reduced-motion'
+import { MaturingWord } from './maturing-word'
 
 // One business, three releases: the same loop we run for clients.
 const versions = [
@@ -271,14 +272,7 @@ export function Hero() {
                 animate="show"
               >
                 {h.accent ? (
-                  <motion.span
-                    className="bg-[linear-gradient(100deg,var(--accent)_25%,color-mix(in_srgb,var(--accent)_40%,var(--ok))_50%,var(--accent)_75%)] bg-[length:250%_100%] bg-clip-text text-transparent"
-                    initial={{ backgroundPosition: '100% 0%' }}
-                    animate={reduce ? undefined : { backgroundPosition: ['100% 0%', '0% 0%'] }}
-                    transition={{ duration: 3.2, delay: 1.2, repeat: Infinity, repeatType: 'mirror', ease: 'easeInOut' }}
-                  >
-                    {h.w}
-                  </motion.span>
+                  <MaturingWord word={h.w} startDelay={0.45 + i * 0.18} />
                 ) : (
                   h.w
                 )}

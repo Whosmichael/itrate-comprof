@@ -8,9 +8,9 @@ const body = Plus_Jakarta_Sans({
   weight: ['400', '500', '600', '700'],
   variable: '--font-body',
 })
+// Variable font (full weight axis) so "Iterate." can step through weights letter by letter.
 const heading = Bricolage_Grotesque({
   subsets: ['latin'],
-  weight: ['500', '700', '800'],
   variable: '--font-heading',
 })
 const code = JetBrains_Mono({
