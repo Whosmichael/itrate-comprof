@@ -1,11 +1,14 @@
 import { SectionHead } from './section-head'
 
 const steps = [
-  { title: 'Discover', text: 'We talk about your business, your customers, and what the site should do.' },
+  {
+    title: 'Discover',
+    text: 'We learn your business and customers. Already have a website or social pages? We review them and advise on what to improve.',
+  },
   { title: 'Design', text: 'We design the look. You review and give feedback before anything is built.' },
   { title: 'Build', text: 'The design becomes a fast site that works on every device.' },
-  { title: 'Launch', text: 'Your site goes live on your domain. Version one, ready to use.' },
-  { title: 'Improve', text: 'Add features, update content, fix what needs fixing. Then back to step 1.' },
+  { title: 'Launch', text: 'Your site goes live on your domain, and we walk you through it.' },
+  { title: 'Iterate', text: 'We improve the site based on your input. Then back to step 1.' },
 ]
 
 export function Process() {
