@@ -120,3 +120,11 @@
 .group:hover .animate-marquee {
   animation-play-state: paused;
 }
+
+/* Text painted with the young → mature gradient (used in the scattered strip) */
+.maturing-text {
+  background: linear-gradient(90deg, var(--m0), var(--m1) 55%, var(--m2));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
