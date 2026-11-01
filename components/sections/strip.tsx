@@ -25,8 +25,8 @@ export function Strip() {
     <div ref={ref} className="border-y border-border bg-surface py-6">
       <div className="container-site flex flex-wrap items-center gap-x-8 gap-y-4">
         <p className="max-w-[31ch] text-[15px] leading-snug">
-          <span className="font-semibold">No need to change how you work.</span>{' '}
-          <span className="text-muted-foreground">We build around the tools you already use.</span>
+          <span className="font-semibold">No need to start from scratch.</span>{' '}
+          <span className="text-muted-foreground">We build on top of the tools you already use.</span>
         </p>
         <ul className="flex flex-1 flex-wrap items-center gap-x-1.5 gap-y-2">
           {tools.map((t, i) => (
