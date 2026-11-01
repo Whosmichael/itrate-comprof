@@ -11,40 +11,45 @@ import {
   useTransform,
   type MotionValue,
 } from 'framer-motion'
-import { RotateCw } from 'lucide-react'
+import { Compass, PencilRuler, Rocket, RotateCw, Wrench, type LucideIcon } from 'lucide-react'
 import { Reveal } from '@/components/motion/reveal'
 import { cn } from '@/lib/utils'
 import { SectionHead } from './section-head'
 
-type Step = { title: string; doText: string; get: string; you: string }
+type Step = { title: string; icon: LucideIcon; doText: string; get: string; you: string }
 
 const steps: Step[] = [
   {
     title: 'Discover',
+    icon: Compass,
     doText: 'We learn how your business works today. Already using some tools? We review them and advise on what to improve.',
     get: 'A short plan with our recommendation',
     you: 'Tell us how you work and what’s slowing you down.',
   },
   {
     title: 'Design',
+    icon: PencilRuler,
     doText: 'We design how it will look and work, before any code is written.',
     get: 'A clickable preview you can try',
     you: 'Review it and tell us what to change.',
   },
   {
     title: 'Build',
+    icon: Wrench,
     doText: 'We build it to run fast and reliably, on every device your team uses.',
     get: 'A working version you can test',
     you: 'Try it with real tasks and flag anything odd.',
   },
   {
     title: 'Ship',
+    icon: Rocket,
     doText: 'It goes live, and we walk you and your team through it.',
     get: 'A live product, plus a walkthrough for your team',
     you: 'Start using it.',
   },
   {
     title: 'Iterate',
+    icon: RotateCw,
     doText: 'We watch what works and improve what we’ve built based on your input.',
     get: 'Regular improvements, shipped as new versions',
     you: 'Tell us what you need next.',
@@ -64,11 +69,14 @@ const pointAt = (deg: number, r = R) => {
 function StepDetail({ step, i }: { step: Step; i: number }) {
   return (
     <div className="grid gap-4">
-      <div className="flex items-baseline gap-3">
+      <div className="flex items-center gap-3">
+        <span className="grid size-10 place-items-center rounded-lg bg-accent-soft text-accent">
+          <step.icon className="size-5" />
+        </span>
+        <h3 className="text-[clamp(26px,2.6vw,34px)] font-bold">{step.title}</h3>
         <span className="font-mono text-xs text-accent">
           {String(i + 1).padStart(2, '0')} / {String(N).padStart(2, '0')}
         </span>
-        <h3 className="text-[clamp(26px,2.6vw,34px)] font-bold">{step.title}</h3>
       </div>
       <p className="max-w-[48ch] text-[15px] text-muted-foreground">{step.doText}</p>
       <dl className="grid max-w-[48ch] gap-3 text-[14px]">
@@ -126,7 +134,7 @@ function Ring({ progress, active }: { progress: MotionValue<number>; active: num
                 <motion.circle
                   cx={p.x}
                   cy={p.y}
-                  r="22"
+                  r="26"
                   fill="var(--accent)"
                   initial={{ opacity: 0.35, scale: 0.6 }}
                   animate={{ opacity: 0, scale: 1.4 }}
@@ -137,23 +145,12 @@ function Ring({ progress, active }: { progress: MotionValue<number>; active: num
               <circle
                 cx={p.x}
                 cy={p.y}
-                r="15"
+                r="19"
                 fill={reached ? 'var(--accent)' : 'var(--surface)'}
                 stroke={reached ? 'var(--accent)' : 'var(--line)'}
                 strokeWidth="3"
                 style={{ transition: 'fill .4s, stroke .4s' }}
               />
-              <text
-                x={p.x}
-                y={p.y + 4}
-                textAnchor="middle"
-                fontSize="11"
-                fontFamily="var(--font-code), monospace"
-                fill={reached ? 'var(--accent-ink)' : 'var(--muted)'}
-                style={{ transition: 'fill .4s' }}
-              >
-                {String(i + 1).padStart(2, '0')}
-              </text>
             </g>
           )
         })}
@@ -162,18 +159,40 @@ function Ring({ progress, active }: { progress: MotionValue<number>; active: num
         <motion.circle cx={dotX} cy={dotY} r="6" fill="var(--surface)" stroke="var(--accent)" strokeWidth="3" />
       </svg>
 
+      {/* Step icons inside the nodes */}
+      {steps.map((s, i) => {
+        const p = pointAt(angleOf(i))
+        const reached = i <= active
+        return (
+          <motion.span
+            key={`icon-${s.title}`}
+            aria-hidden
+            className={cn(
+              'absolute grid -translate-x-1/2 -translate-y-1/2 place-items-center transition-colors duration-300',
+              reached ? 'text-accent-foreground' : 'text-muted-foreground',
+            )}
+            style={{ left: `${(p.x / 400) * 100}%`, top: `${(p.y / 400) * 100}%` }}
+            animate={i === active ? { scale: [1, 1.18, 1] } : { scale: 1 }}
+            transition={{ duration: 0.5 }}
+          >
+            <s.icon className="size-[18px]" strokeWidth={2.2} />
+          </motion.span>
+        )
+      })}
+
       {/* Step labels around the ring */}
       {steps.map((s, i) => {
-        const p = pointAt(angleOf(i), R + 46)
+        const p = pointAt(angleOf(i), R + 52)
         return (
           <span
             key={s.title}
             className={cn(
-              'absolute -translate-x-1/2 -translate-y-1/2 font-display text-[15px] whitespace-nowrap transition-colors duration-300',
+              'absolute flex -translate-x-1/2 -translate-y-1/2 items-baseline gap-1.5 font-display text-[15px] whitespace-nowrap transition-colors duration-300',
               i === active ? 'font-bold text-foreground' : i < active ? 'text-foreground/70' : 'text-muted-foreground',
             )}
             style={{ left: `${(p.x / 400) * 100}%`, top: `${(p.y / 400) * 100}%` }}
           >
+            <span className="font-mono text-[10px] font-normal text-accent">{String(i + 1).padStart(2, '0')}</span>
             {s.title}
           </span>
         )
@@ -190,6 +209,19 @@ function Ring({ progress, active }: { progress: MotionValue<number>; active: num
             exit={{ opacity: 0, y: -10, filter: 'blur(6px)' }}
             transition={{ duration: 0.35 }}
           >
+            {(() => {
+              const Icon = steps[active].icon
+              return (
+                <motion.span
+                  className="mb-1 grid size-14 place-items-center rounded-2xl bg-accent-soft text-accent"
+                  initial={{ rotate: -20, scale: 0.7 }}
+                  animate={{ rotate: 0, scale: 1 }}
+                  transition={{ type: 'spring', stiffness: 260, damping: 16 }}
+                >
+                  <Icon className="size-7" />
+                </motion.span>
+              )
+            })()}
             <span className="font-mono text-[11px] text-accent">
               {String(active + 1).padStart(2, '0')} / {String(N).padStart(2, '0')}
             </span>
@@ -269,12 +301,13 @@ export function Process() {
                     onClick={() => goTo(i)}
                     aria-current={i === active ? 'step' : undefined}
                     className={cn(
-                      'rounded-full border px-3 py-1.5 text-[13px] font-medium transition-colors',
+                      'inline-flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-[13px] font-medium transition-colors',
                       i === active
                         ? 'border-accent bg-accent text-accent-foreground'
                         : 'border-border bg-surface text-muted-foreground hover:text-foreground',
                     )}
                   >
+                    <s.icon className="size-3.5" />
                     {s.title}
                   </button>
                 ))}
@@ -299,8 +332,8 @@ export function Process() {
           <ol className="relative grid gap-10 border-l border-border pl-8">
             {steps.map((s, i) => (
               <Reveal as="li" key={s.title} className="relative">
-                <span className="absolute top-1 -left-[47px] grid size-[30px] place-items-center rounded-full border border-accent/30 bg-surface font-mono text-[11px] text-accent">
-                  {String(i + 1).padStart(2, '0')}
+                <span className="absolute top-1 -left-[49px] grid size-[34px] place-items-center rounded-full border border-accent/30 bg-surface text-accent">
+                  <s.icon className="size-4" />
                 </span>
                 <StepDetail step={s} i={i} />
               </Reveal>
