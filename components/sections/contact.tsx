@@ -4,6 +4,7 @@ import { MessageCircle } from 'lucide-react'
 import { DEFAULT_WA_MESSAGE, site, whatsappLink } from '@/lib/site'
 import { buttonVariants } from '@/components/ui/button'
 import { Reveal } from '@/components/motion/reveal'
+import { Backdrop } from '@/components/layout/backdrop'
 
 const needs = [
   'Not sure yet, want to talk',
@@ -40,7 +41,8 @@ export function Contact() {
   const optional = <span className="font-normal text-muted-foreground"> (optional)</span>
 
   return (
-    <section id="contact" className="scroll-mt-20 pb-[clamp(72px,10vw,128px)]">
+    <section id="contact" className="relative isolate scroll-mt-20 pb-[clamp(72px,10vw,128px)]">
+      <Backdrop variant="cta" />
       <div className="container-site">
         <Reveal y={40}>
           <div className="grid overflow-hidden rounded-2xl border border-border bg-surface shadow-[0_30px_70px_-40px_rgba(var(--shadow),0.3)] md:grid-cols-[1fr_1.1fr]">

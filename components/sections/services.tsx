@@ -7,6 +7,7 @@ import { cn } from '@/lib/utils'
 import { Bot, LifeBuoy } from 'lucide-react'
 import { AutomationScene, NumbersScene, SearchScene, SellScene } from './pillar-visuals'
 import { SectionHead } from './section-head'
+import { Backdrop } from '@/components/layout/backdrop'
 
 type Pillar = {
   name: string
@@ -182,7 +183,8 @@ export function Services() {
   const [active, setActive] = useState(0)
 
   return (
-    <section id="services" className="section scroll-mt-20">
+    <section id="services" className="section relative isolate scroll-mt-20">
+      <Backdrop variant="grid" side="right" />
       <div className="container-site">
         <SectionHead
           eyebrow="What we do"

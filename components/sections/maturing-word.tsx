@@ -40,7 +40,8 @@ export function MaturingWord({
   const settle = startDelay + last * step + 0.6
 
   return (
-    <span className={cn('relative inline-block', underline && 'pb-[0.08em]', className)} aria-label={word}>
+    <span className={cn('relative inline-block', underline && 'pb-[0.08em]', className)}>
+      <span className="sr-only">{word}</span>
       {letters.map((ch, i) => {
         const t = last === 0 ? 1 : i / last
         const weight = Math.round(WEIGHT_FROM + (WEIGHT_TO - WEIGHT_FROM) * t)
@@ -67,16 +68,17 @@ export function MaturingWord({
         // Progress line: fills left → right in the same young → mature colors
         <span aria-hidden className="absolute right-[0.06em] bottom-0 left-[0.04em] h-[0.06em] min-h-px overflow-hidden rounded-full bg-border/70">
           <motion.span
-            className="absolute inset-y-0 left-0 rounded-full bg-[linear-gradient(90deg,var(--m0),var(--m1),var(--m2))]"
-            initial={{ width: '0%' }}
-            animate={{ width: '100%' }}
+            className="absolute inset-0 origin-left rounded-full bg-[linear-gradient(90deg,var(--m0),var(--m1),var(--m2))]"
+            initial={{ scaleX: 0 }}
+            animate={{ scaleX: 1 }}
             transition={reduce ? { duration: 0 } : { delay: startDelay, duration: last * step + 0.7, ease: EASE }}
           />
           {!reduce && (
+            // Moves with transform (x is a % of its own 18% width) so the endless loop never triggers layout.
             <motion.span
-              className="absolute inset-y-0 w-[18%] rounded-full bg-[linear-gradient(90deg,transparent,rgba(255,255,255,0.9),transparent)]"
-              initial={{ left: '-20%' }}
-              animate={{ left: ['-20%', '-20%', '105%'] }}
+              className="absolute inset-y-0 left-0 w-[18%] rounded-full bg-[linear-gradient(90deg,transparent,rgba(255,255,255,0.9),transparent)]"
+              initial={{ x: '-111%' }}
+              animate={{ x: ['-111%', '-111%', '583%'] }}
               transition={{ delay: settle, duration: 4.2, times: [0, 0.7, 1], repeat: Infinity, ease: 'easeInOut' }}
             />
           )}

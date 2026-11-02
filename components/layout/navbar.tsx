@@ -203,7 +203,7 @@ function MobileSidebar({ open, onClose, active }: { open: boolean; onClose: () =
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center gap-2 rounded-md border border-border px-4 py-2.5 text-[14px] font-medium hover:border-accent/40"
               >
-                <MessageCircle className="size-4 text-[#1f9d6b]" />
+                <MessageCircle className="size-4 text-ok" />
                 Chat on WhatsApp
               </a>
               <div className="flex items-center justify-between pt-1 text-[13px] text-muted-foreground">

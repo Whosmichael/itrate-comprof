@@ -5,6 +5,7 @@ import { Strip } from '@/components/sections/strip'
 import { Services } from '@/components/sections/services'
 import { Portfolio } from '@/components/sections/portfolio'
 import { Process } from '@/components/sections/process'
+import { Experience } from '@/components/sections/experience'
 import { Faq } from '@/components/sections/faq'
 import { Contact } from '@/components/sections/contact'
 import { WhatsAppFloat } from '@/components/layout/whatsapp-float'
@@ -18,6 +19,7 @@ export default function Page() {
         <Strip />
         <Services />
         <Portfolio />
+        <Experience />
         <Process />
         <Faq />
         <Contact />

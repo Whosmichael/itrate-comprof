@@ -12,7 +12,7 @@
   --accent: #3a5bd9;
   --accent-soft: #eef2fd;
   --accent-ink: #ffffff;
-  --ok: #1f9d6b;
+  --ok: #16855a;
   --shadow: 22, 26, 38;
   /* "Maturing" word: young → mature */
   --m0: #a9b9f3;
@@ -119,6 +119,63 @@
 }
 .group:hover .animate-marquee {
   animation-play-state: paused;
+}
+
+/* ---------- Section backdrops (see components/layout/backdrop.tsx) ----------
+   CSS-only and transform-only animation so they stay cheap. Reduced motion stops them (global rule). */
+.bd-dots {
+  background-image: radial-gradient(color-mix(in oklab, var(--accent) 38%, var(--line)) 1.5px, transparent 1.7px);
+  background-size: 22px 22px;
+}
+.bd-grid {
+  background-image:
+    linear-gradient(color-mix(in oklab, var(--accent) 22%, var(--line)) 1px, transparent 1px),
+    linear-gradient(90deg, color-mix(in oklab, var(--accent) 22%, var(--line)) 1px, transparent 1px);
+  background-size: 56px 56px;
+}
+/* The grid is 56px larger than its box on every side and slides one cell, so the loop is seamless. */
+.bd-pan {
+  animation: bd-pan 18s linear infinite;
+}
+@keyframes bd-pan {
+  to { transform: translate(56px, 56px); }
+}
+.bd-glow {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(110px);
+  will-change: transform;
+}
+.bd-drift-a { animation: bd-drift-a 22s ease-in-out infinite; }
+.bd-drift-b { animation: bd-drift-b 28s ease-in-out infinite; }
+@keyframes bd-drift-a {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(-70px, 50px) scale(1.12); }
+  66% { transform: translate(40px, -30px) scale(0.94); }
+}
+@keyframes bd-drift-b {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(60px, -40px) scale(1.1); }
+}
+.bd-spin { animation: bd-spin 60s linear infinite; }
+.bd-spin-rev { animation: bd-spin 90s linear infinite reverse; }
+@keyframes bd-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Hero entrance in plain CSS so the text paints before JavaScript loads (faster LCP).
+   Delay comes from --d; reduced motion is handled by the global rule above. */
+@keyframes hero-fade-up {
+  from { opacity: 0.01; transform: translateY(16px); }
+}
+@keyframes hero-word-in {
+  from { opacity: 0.01; transform: translateY(0.45em); filter: blur(10px); }
+}
+.hero-fade {
+  animation: hero-fade-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) var(--d, 0s) both;
+}
+.hero-word {
+  animation: hero-word-in 0.8s cubic-bezier(0.22, 1, 0.36, 1) var(--d, 0s) both;
 }
 
 /* Touch screens can't hover, so project screenshots scroll by themselves there */

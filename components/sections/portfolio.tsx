@@ -8,6 +8,7 @@ import { ArrowUpRight } from 'lucide-react'
 import { Reveal } from '@/components/motion/reveal'
 import { cn } from '@/lib/utils'
 import { SectionHead } from './section-head'
+import { Backdrop } from '@/components/layout/backdrop'
 
 type Project = {
   name: string
@@ -127,7 +128,8 @@ function Shot({ p }: { p: Project }) {
 
 export function Portfolio() {
   return (
-    <section id="work" className="section scroll-mt-20 border-y border-border bg-surface">
+    <section id="work" className="section relative isolate scroll-mt-20 border-y border-border bg-surface">
+      <Backdrop variant="dots" side="left" />
       <div className="container-site">
         <SectionHead
           eyebrow="Projects"

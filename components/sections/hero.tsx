@@ -1,11 +1,12 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { AnimatePresence, motion, useMotionValue, useSpring, useTransform, type Variants } from 'framer-motion'
+import { AnimatePresence, motion, useMotionValue, useSpring, useTransform } from 'framer-motion'
 import { ArrowRight } from 'lucide-react'
 import { buttonVariants } from '@/components/ui/button'
 import { useReducedMotionSafe } from '@/lib/use-reduced-motion'
 import { MaturingWord } from './maturing-word'
+import { Backdrop } from '@/components/layout/backdrop'
 
 // One business, three releases: the same loop we run for clients.
 const versions = [
@@ -23,21 +24,6 @@ const headline = [
   { w: 'Iterate.', accent: true },
 ]
 
-const word: Variants = {
-  hidden: { opacity: 0, y: '0.45em', filter: 'blur(10px)' },
-  show: (i: number) => ({
-    opacity: 1,
-    y: 0,
-    filter: 'blur(0px)',
-    transition: { delay: 0.15 + i * 0.18, duration: 0.8, ease: EASE },
-  }),
-}
-
-const fadeUp: Variants = {
-  hidden: { opacity: 0, y: 16 },
-  show: (delay: number) => ({ opacity: 1, y: 0, transition: { delay, duration: 0.7, ease: EASE } }),
-}
-
 const screen = {
   initial: { opacity: 0, y: 14, filter: 'blur(4px)' },
   animate: { opacity: 1, y: 0, filter: 'blur(0px)' },
@@ -52,16 +38,17 @@ function WebsiteScreen() {
         {[58, 40].map((w, i) => (
           <motion.div
             key={w}
-            className="h-2.5 rounded-sm bg-border"
-            initial={{ width: 0 }}
-            animate={{ width: `${w}%` }}
+            className="h-2.5 origin-left rounded-sm bg-border"
+            style={{ width: `${w}%` }}
+            initial={{ scaleX: 0 }}
+            animate={{ scaleX: 1 }}
             transition={{ delay: 0.2 + i * 0.12, duration: 0.6, ease: 'easeOut' }}
           />
         ))}
         <motion.div
-          className="h-2.5 rounded-sm bg-accent"
-          initial={{ width: 0 }}
-          animate={{ width: '30%' }}
+          className="h-2.5 w-[30%] origin-left rounded-sm bg-accent"
+          initial={{ scaleX: 0 }}
+          animate={{ scaleX: 1 }}
           transition={{ delay: 0.45, duration: 0.6, ease: 'easeOut' }}
         />
       </div>
@@ -237,76 +224,56 @@ export function Hero() {
 
   return (
     <section className="relative isolate overflow-hidden pt-[clamp(56px,8vw,112px)] pb-[clamp(72px,9vw,120px)]">
-      {/* Background: dot grid fading out from the centre, plus two slow glows */}
-      <div
-        aria-hidden
-        className="absolute inset-0 -z-10 [background-image:radial-gradient(var(--line)_1.2px,transparent_1.2px)] [background-size:22px_22px] [mask-image:radial-gradient(ellipse_70%_60%_at_60%_40%,#000_30%,transparent_75%)]"
-      />
-      <motion.div
-        aria-hidden
-        className="absolute top-[-10%] right-[-5%] -z-10 size-[520px] max-w-full rounded-full bg-accent/15 blur-[120px]"
-        animate={reduce ? undefined : { x: [0, -60, 30, 0], y: [0, 40, -20, 0], scale: [1, 1.1, 0.95, 1] }}
-        transition={{ duration: 20, repeat: Infinity, ease: 'easeInOut' }}
-      />
-      <motion.div
-        aria-hidden
-        className="absolute bottom-[-20%] left-[-10%] -z-10 size-[420px] max-w-full rounded-full bg-ok/10 blur-[120px]"
-        animate={reduce ? undefined : { x: [0, 50, -20, 0], y: [0, -30, 20, 0] }}
-        transition={{ duration: 24, repeat: Infinity, ease: 'easeInOut' }}
-      />
+      {/* Background: bold dot grid fading out from the centre, plus three slow glows */}
+      <Backdrop variant="hero" />
 
       <div className="container-site grid items-center gap-[clamp(48px,5vw,72px)] lg:grid-cols-[1.05fr_0.95fr]">
         <div className="grid min-w-0 gap-6">
-          <motion.span className="eyebrow" variants={fadeUp} custom={0} initial="hidden" animate="show">
+          {/* Entrances are CSS (hero-fade / hero-word) so the text paints before hydration */}
+          <span className="eyebrow hero-fade" style={{ '--d': '0s' } as React.CSSProperties}>
             Your tech team for small businesses
-          </motion.span>
+          </span>
 
           <h1 className="text-[clamp(48px,7vw,92px)] leading-[0.98] font-extrabold">
             {headline.map((h, i) => (
-              <motion.span
+              <span
                 key={h.w}
-                className="mr-[0.22em] inline-block last:mr-0"
-                variants={word}
-                custom={i}
-                initial="hidden"
-                animate="show"
+                className="hero-word mr-[0.22em] inline-block last:mr-0"
+                style={{ '--d': `${0.15 + i * 0.18}s` } as React.CSSProperties}
               >
                 {h.accent ? (
                   <MaturingWord word={h.w} startDelay={0.45 + i * 0.18} />
                 ) : (
                   h.w
                 )}
-              </motion.span>
+              </span>
             ))}
           </h1>
 
-          <motion.p className="lead" variants={fadeUp} custom={0.75} initial="hidden" animate="show">
+          <p className="lead hero-fade" style={{ '--d': '0.75s' } as React.CSSProperties}>
             We’re the tech team your business doesn’t have yet. Websites, custom systems, and AI automations, built
             for you and looked after long after launch.
-          </motion.p>
+          </p>
 
-          <motion.div className="flex flex-wrap gap-3" variants={fadeUp} custom={0.9} initial="hidden" animate="show">
+          <div className="hero-fade flex flex-wrap gap-3" style={{ '--d': '0.9s' } as React.CSSProperties}>
             <a href="#contact" className={buttonVariants({ size: 'lg', className: 'group' })}>
               Start a Project <ArrowRight className="transition-transform group-hover:translate-x-1" />
             </a>
             <a href="#work" className={buttonVariants({ size: 'lg', variant: 'outline' })}>
               See Our Projects
             </a>
-          </motion.div>
+          </div>
 
-          <motion.p
-            className="flex items-center gap-2 text-sm text-muted-foreground"
-            variants={fadeUp}
-            custom={1.05}
-            initial="hidden"
-            animate="show"
+          <p
+            className="hero-fade flex items-center gap-2 text-sm text-muted-foreground"
+            style={{ '--d': '1.05s' } as React.CSSProperties}
           >
             <span aria-hidden className="relative flex size-2">
               <span className="absolute inline-flex size-full animate-ping rounded-full bg-ok opacity-60" />
               <span className="relative inline-flex size-2 rounded-full bg-ok" />
             </span>
             First consultation is free, no commitment.
-          </motion.p>
+          </p>
         </div>
 
         {/* Mockup: one business growing from website to system to AI */}
@@ -361,10 +328,10 @@ export function Hero() {
                   <motion.span
                     key={`deploy-${stage}`}
                     aria-hidden
-                    className="absolute bottom-[-1px] left-0 h-0.5 bg-accent"
-                    initial={{ width: '0%', opacity: 1 }}
-                    animate={{ width: '100%', opacity: [1, 1, 0] }}
-                    transition={{ width: { duration: 1.1, ease: 'easeOut' }, opacity: { times: [0, 0.8, 1], duration: 1.4 } }}
+                    className="absolute bottom-[-1px] left-0 h-0.5 w-full origin-left bg-accent"
+                    initial={{ scaleX: 0, opacity: 1 }}
+                    animate={{ scaleX: 1, opacity: [1, 1, 0] }}
+                    transition={{ scaleX: { duration: 1.1, ease: 'easeOut' }, opacity: { times: [0, 0.8, 1], duration: 1.4 } }}
                   />
                 )}
               </div>

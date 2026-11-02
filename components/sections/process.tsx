@@ -15,6 +15,7 @@ import { Compass, PencilRuler, Rocket, RotateCw, Wrench, type LucideIcon } from 
 import { Reveal } from '@/components/motion/reveal'
 import { cn } from '@/lib/utils'
 import { SectionHead } from './section-head'
+import { Backdrop } from '@/components/layout/backdrop'
 
 type Step = { title: string; icon: LucideIcon; doText: string; get: string; you: string }
 
@@ -279,7 +280,8 @@ export function Process() {
     <section id="process" className="scroll-mt-20 bg-background">
       {/* Desktop: the loop pins in place and is driven by scroll */}
       <div ref={ref} className="relative hidden lg:block lg:h-[340vh]">
-        <div className="sticky top-[68px] flex h-[calc(100vh-68px)] items-center">
+        <div className="sticky top-[68px] isolate flex h-[calc(100vh-68px)] items-center">
+          <Backdrop variant="soft" side="right" />
           <div className="container-site grid w-full grid-cols-[0.9fr_1.1fr] items-center gap-16">
             <div className="grid content-center gap-7">
               <div className="grid gap-3.5">
@@ -360,7 +362,8 @@ function MobileLoop() {
         </Reveal>
       </div>
       <div ref={ref} className="relative h-[420vh]">
-        <div className="sticky top-[68px] flex h-[calc(100svh-68px)] flex-col items-center justify-center gap-5 overflow-hidden">
+        <div className="sticky top-[68px] isolate flex h-[calc(100svh-68px)] flex-col items-center justify-center gap-5 overflow-hidden">
+          <Backdrop variant="soft" side="right" />
           <div className="w-[min(300px,70vw,44svh)]">
             <Ring progress={progress} active={active} compact />
           </div>

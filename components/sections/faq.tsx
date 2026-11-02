@@ -1,5 +1,6 @@
 import { Reveal } from '@/components/motion/reveal'
 import { SectionHead } from './section-head'
+import { Backdrop } from '@/components/layout/backdrop'
 
 const faqs = [
   {
@@ -30,7 +31,8 @@ const faqs = [
 
 export function Faq() {
   return (
-    <section id="faq" className="section scroll-mt-20">
+    <section id="faq" className="section relative isolate scroll-mt-20">
+      <Backdrop variant="dots" side="right" />
       <div className="container-site grid gap-12 md:grid-cols-[0.8fr_1.2fr]">
         <SectionHead eyebrow="FAQ" title="Common questions." className="mb-0 content-start" />
         <div className="min-w-0 border-t border-border">

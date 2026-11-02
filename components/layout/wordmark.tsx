@@ -16,7 +16,7 @@ export function Wordmark({ className, startDelay = 0.2 }: { className?: string; 
   const markDelay = startDelay + 5 * 0.11 + 0.35
 
   return (
-    <span className={cn('inline-flex items-baseline font-display tracking-[-0.04em]', className)} aria-label="itrate">
+    <span className={cn('inline-flex items-baseline font-display tracking-[-0.04em]', className)}>
       <MaturingWord word="itrate" startDelay={startDelay} underline={false} />
       <motion.span
         aria-hidden
